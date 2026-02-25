@@ -48,7 +48,7 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
         Back
       </a>
       <a href="#about-section" class="event-tab text-sm font-medium px-4 py-2 rounded-[5px] border border-neutral-300 bg-white text-black transition-colors">About</a>
-      <a href="#restrictions-section" class="event-tab text-xs md:text-sm font-medium px-3 md:px-4 py-2 rounded-[5px] bg-neutral-800 text-neutral-300 hover:text-white transition-colors">Restrictions</a>
+      <a href="#restrictions-section" class="event-tab text-xs md:text-sm font-medium px-3 md:px-4 py-2 rounded-[5px] border border-neutral-300 bg-white text-black transition-colors">Restrictions</a>
     </div>
     <a href="?view=schedule" class="hidden md:flex items-center gap-1.5 text-sm font-medium text-[#24CECE] hover:text-[#20B8B8] transition-colors">
       See Full Calendar
