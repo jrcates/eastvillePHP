@@ -182,8 +182,18 @@ $(function () {
     $('#addons-subtotal').text('$' + total.toFixed(2));
     $('#addons-total').text('$' + total.toFixed(2));
 
-    // Build checkout URL with addon total
+    // Build checkout URL with addon total and item details
     var url = '?view=checkout&show=' + encodeURIComponent(showId) + '&qty=' + ticketQty + '&addons=' + total.toFixed(2);
+    var addonItems = [];
+    $('.addon-card').each(function () {
+      var qty = parseInt($(this).find('.addon-qty').text());
+      if (qty > 0) {
+        addonItems.push($(this).data('name') + ':' + qty + ':' + $(this).data('price'));
+      }
+    });
+    if (addonItems.length > 0) {
+      url += '&addon_items=' + encodeURIComponent(addonItems.join('|'));
+    }
     $('#continue-checkout').attr('href', url);
   }
 
