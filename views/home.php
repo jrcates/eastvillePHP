@@ -83,7 +83,7 @@ $galleryImages = [
                   <?= htmlspecialchars($slide['location']) ?>
                 </div>
                 <p class="text-neutral-500 text-lg leading-relaxed font-normal"><?= htmlspecialchars($slide['description']) ?></p>
-                <a href="?view=event&show=<?= urlencode($slide['id']) ?>" class="inline-block px-8 py-3 bg-[#24CECE] hover:bg-[#20B8B8] text-black font-bold rounded-full text-base transition-all mt-2 hover:-translate-y-0.5">View Event</a>
+                <a href="?view=event&show=<?= urlencode($slide['id']) ?>" class="inline-block px-8 py-3 bg-[#24CECE] hover:bg-[#20B8B8] text-black font-bold rounded-full text-base transition-all mt-2 hover:-translate-y-0.5">Buy Tickets</a>
               </div>
             </div>
             <!-- Right Image -->
@@ -140,7 +140,7 @@ $galleryImages = [
           <p class="text-neutral-500 text-sm leading-relaxed line-clamp-2">Join us for Comedy Night at <?= htmlspecialchars($show['location']) ?>. The show will feature top acts from around the country.</p>
         </div>
         <!-- Button -->
-        <a href="?view=event&show=<?= urlencode($show['id']) ?>" class="px-8 py-3 bg-[#24CECE] text-black font-bold rounded-full text-sm hover:bg-[#20B8B8] transition-colors whitespace-nowrap flex-shrink-0 hover-lift shadow-lg shadow-[#24CECE]/20">View Event</a>
+        <a href="?view=event&show=<?= urlencode($show['id']) ?>" class="px-8 py-3 bg-[#24CECE] text-black font-bold rounded-full text-sm hover:bg-[#20B8B8] transition-colors whitespace-nowrap flex-shrink-0 hover-lift shadow-lg shadow-[#24CECE]/20">Buy Tickets</a>
       </div>
       <?php endforeach; ?>
     </div>
