@@ -33,8 +33,8 @@ $galleryImages = [
       .hero-card { width: 70vw; height: auto; flex-direction: column; }
     }
     @media (max-width: 768px) {
-      .hero-slide { flex: 0 0 85vw; }
-      .hero-card { width: 85vw; }
+      .hero-slide { flex: 0 0 88vw; }
+      .hero-card { width: 88vw; flex-direction: column; }
     }
     .slick-prev-btn, .slick-next-btn {
       position: absolute; top: 50%; z-index: 20;
@@ -51,8 +51,8 @@ $galleryImages = [
       .slick-next-btn { right: calc(50% - 35vw - 25px); }
     }
     @media (max-width: 768px) {
-      .slick-prev-btn { left: calc(50% - 42.5vw - 20px); }
-      .slick-next-btn { right: calc(50% - 42.5vw - 20px); }
+      .slick-prev-btn { left: 4px; width: 40px; height: 40px; }
+      .slick-next-btn { right: 4px; width: 40px; height: 40px; }
     }
   </style>
 
@@ -65,7 +65,7 @@ $galleryImages = [
         <div class="hero-slide">
           <div class="hero-card">
             <!-- Left Content -->
-            <div class="w-full md:w-[678px] h-full p-12 md:p-16 md:pl-20 flex flex-col justify-between gap-10 bg-white text-neutral-900 relative z-10">
+            <div class="w-full md:w-[678px] h-full p-8 md:p-16 md:pl-20 flex flex-col justify-between gap-6 md:gap-10 bg-white text-neutral-900 relative z-10">
               <!-- Date Badge -->
               <div class="flex flex-col items-center w-fit">
                 <div class="border border-black rounded-[5px] pt-2 pb-1 px-4 text-center min-w-[80px] bg-white">
@@ -76,17 +76,21 @@ $galleryImages = [
                 <div class="bg-black text-white text-xs px-3 py-1 mt-1 font-medium rounded-[5px] tracking-wide w-full text-center"><?= htmlspecialchars($d['time']) ?></div>
               </div>
 
-              <div class="space-y-5 max-w-lg mb-8 relative z-10">
-                <h2 class="text-4xl md:text-5xl font-black uppercase leading-[0.9] tracking-tight text-black"><?= htmlspecialchars($slide['title']) ?></h2>
+              <div class="space-y-4 md:space-y-5 max-w-lg mb-4 md:mb-8 relative z-10">
+                <h2 class="text-3xl md:text-5xl font-black uppercase leading-[0.9] tracking-tight text-black"><?= htmlspecialchars($slide['title']) ?></h2>
                 <div class="inline-flex items-center gap-2 bg-[#F26522] text-white text-sm font-medium px-4 py-2 rounded-[5px] w-fit">
                   <i data-lucide="map-pin" class="w-4 h-4"></i>
                   <?= htmlspecialchars($slide['location']) ?>
                 </div>
-                <p class="text-neutral-500 text-lg leading-relaxed font-normal"><?= htmlspecialchars($slide['description']) ?></p>
+                <p class="text-neutral-500 text-base md:text-lg leading-relaxed font-normal"><?= htmlspecialchars($slide['description']) ?></p>
                 <a href="?view=event&show=<?= urlencode($slide['id']) ?>" class="inline-block px-8 py-3 bg-[#24CECE] hover:bg-[#20B8B8] text-black font-bold rounded-full text-base transition-all mt-2 hover:-translate-y-0.5">Buy Tickets</a>
               </div>
             </div>
-            <!-- Right Image -->
+            <!-- Mobile Image (shown only on mobile, at the bottom) -->
+            <div class="block md:hidden w-full h-[200px] overflow-hidden">
+              <img src="<?= htmlspecialchars($slide['image']) ?>" alt="<?= htmlspecialchars($slide['title']) ?>" class="w-full h-full object-cover" />
+            </div>
+            <!-- Right Image (desktop only) -->
             <div class="hidden md:block absolute top-1/2 right-12 -translate-y-1/2 w-[460px] h-[480px] rounded-[5px] overflow-hidden shadow-2xl">
               <img src="<?= htmlspecialchars($slide['image']) ?>" alt="<?= htmlspecialchars($slide['title']) ?>" class="w-full h-full object-cover" />
             </div>
@@ -262,6 +266,19 @@ $(function () {
 
   // Auto-advance every 5s
   setInterval(function () { if (!isTransitioning) goTo(current + 1); }, 5000);
+
+  // Touch swipe support
+  var touchStartX = 0;
+  var touchEndX = 0;
+  $track[0].addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  $track[0].addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goTo(current + 1);
+      else goTo(current - 1);
+    }
+  });
 
   // Recalculate on resize
   $(window).on('resize', function () { positionTrack(false); });
