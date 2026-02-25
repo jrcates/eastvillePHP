@@ -24,13 +24,13 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
 
     <!-- Info Side -->
     <div class="lg:col-span-5 space-y-8">
-      <div class="bg-neutral-900/50 p-8 rounded-[5px] border border-neutral-800">
+      <div class="bg-[#3A4655] p-8 rounded-[5px] border border-neutral-800">
         <i data-lucide="gift" class="w-12 h-12 text-[#24CECE] mb-6"></i>
         <h2 class="text-2xl font-bold mb-4">How it works</h2>
         <div class="space-y-4 text-neutral-300">
           <p>You can purchase a gift certificate here for tickets to the club! We will email you a copy of the gift certificate and then you can use it or send it to the person you are gifting it to.</p>
           <div class="p-4 bg-[#24CECE]/10 border border-[#24CECE]/20 rounded-[5px] text-[#24CECE] text-sm">
-            <strong>Please note:</strong> Gift certificates only cover purchase of tickets.
+            <strong>Please note:</strong> Gift certificates only cover purchase of tickets. We do not offer gift certificates for drinks/food online.
           </div>
         </div>
       </div>
@@ -60,12 +60,12 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
 
     <!-- Form Side -->
     <div class="lg:col-span-7">
-      <form method="POST" action="?view=gift" class="bg-white p-8 md:p-10 rounded-[5px] border border-neutral-200 shadow-xl space-y-8 text-neutral-900">
+      <form method="POST" action="?view=gift" class="bg-white pt-0 pb-8 px-8 md:px-10 rounded-[5px] border border-neutral-200 shadow-xl space-y-8 text-neutral-900">
         <input type="hidden" name="gift_submitted" value="1" />
 
         <!-- Amount -->
         <div>
-          <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-neutral-900">💵 Gift Amount</h3>
+          <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-neutral-900"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#24CECE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Gift Amount</h3>
           <div class="grid grid-cols-3 gap-4 mb-4">
             <?php foreach (['25','50','100'] as $val): ?>
             <button type="button" class="amount-btn py-3 rounded-[5px] font-bold border transition-all bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-[#24CECE]/50" data-val="<?= $val ?>">$<?= $val ?></button>
@@ -79,7 +79,7 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
 
         <!-- Personal Info -->
         <div>
-          <h3 class="text-xl font-bold mb-6 text-neutral-900">👤 Personal Information</h3>
+          <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-neutral-900"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#24CECE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Personal Information</h3>
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-2"><label class="text-sm text-neutral-600 ml-1 font-semibold">First Name</label><input type="text" name="first_name" class="w-full bg-neutral-50 border border-neutral-200 rounded-[5px] p-3 text-neutral-900 focus:ring-2 focus:ring-[#24CECE] outline-none" required /></div>
             <div class="space-y-2"><label class="text-sm text-neutral-600 ml-1 font-semibold">Last Name</label><input type="text" name="last_name" class="w-full bg-neutral-50 border border-neutral-200 rounded-[5px] p-3 text-neutral-900 focus:ring-2 focus:ring-[#24CECE] outline-none" required /></div>
@@ -90,7 +90,7 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
 
         <!-- Payment Info -->
         <div>
-          <h3 class="text-xl font-bold mb-6 text-neutral-900">💳 Payment Information</h3>
+          <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-neutral-900"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#24CECE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg> Payment Information</h3>
           <div class="space-y-4">
             <div class="space-y-2"><label class="text-sm text-neutral-600 ml-1 font-semibold">Card Number</label><input type="text" name="card" placeholder="0000 0000 0000 0000" class="w-full bg-neutral-50 border border-neutral-200 rounded-[5px] p-3 text-neutral-900 focus:ring-2 focus:ring-[#24CECE] outline-none" required /></div>
             <div class="grid grid-cols-2 gap-4">
@@ -101,7 +101,7 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
         </div>
 
         <button type="submit" class="w-full py-4 bg-[#24CECE] text-neutral-900 font-bold text-lg rounded-[5px] hover:bg-[#20B8B8] transition-colors shadow-lg mt-8">Purchase Gift Certificate</button>
-        <p class="text-center text-xs text-neutral-500 mt-4 flex items-center justify-center gap-2">🔒 Secure 256-bit SSL Encrypted Payment</p>
+        <p class="text-center text-xs text-neutral-500 mt-4 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Secure 256-bit SSL Encrypted Payment</p>
       </form>
     </div>
   </div>

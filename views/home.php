@@ -136,7 +136,7 @@ $galleryImages = [
         </div>
         <!-- Content -->
         <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left self-center">
-          <h3 class="text-2xl font-black text-black uppercase mb-3"><?= htmlspecialchars($show['title']) ?></h3>
+          <h3 class="text-[20px] font-extrabold text-black uppercase mb-3"><?= htmlspecialchars($show['title']) ?></h3>
           <div class="flex items-center gap-2 bg-[#F26522] text-white text-xs font-bold px-3 py-1.5 rounded-[5px] mb-3 w-fit">
             <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
             <span class="uppercase"><?= htmlspecialchars($show['location']) ?>, South Glastonbury, CT</span>

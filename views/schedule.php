@@ -99,7 +99,7 @@ foreach ($shows as $show) {
       <!-- Date Header -->
       <div class="flex items-center gap-4 mb-6 mt-8">
         <div class="w-2 h-8 bg-[#24CECE] rounded-full"></div>
-        <h2 class="text-xl md:text-3xl font-black text-white uppercase tracking-tighter"><?= htmlspecialchars(strtoupper($dateLabel)) ?></h2>
+        <h2 class="text-[22px] font-extrabold text-white uppercase tracking-tighter"><?= htmlspecialchars(strtoupper($dateLabel)) ?></h2>
       </div>
       <div class="flex flex-col gap-4">
         <?php foreach ($dayShows as $show): ?>
@@ -120,7 +120,7 @@ foreach ($shows as $show) {
           <!-- Content -->
           <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left self-center">
             <div class="flex flex-wrap justify-between items-start w-full mb-3 gap-2">
-              <h3 class="text-2xl font-black text-black uppercase"><?= htmlspecialchars($show['title']) ?></h3>
+              <h3 class="text-[20px] font-extrabold text-black uppercase"><?= htmlspecialchars($show['title']) ?></h3>
               <?php if ($show['status'] === 'Sold Out'): ?>
               <span class="text-xs font-bold uppercase tracking-wider text-red-500 border border-red-500 px-2 py-1 rounded whitespace-nowrap">Sold Out</span>
               <?php endif; ?>

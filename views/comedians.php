@@ -76,13 +76,6 @@ $current = array_slice($filtered, ($page - 1) * $perPage, $perPage);
       <div class="relative overflow-hidden rounded-[5px] mb-4 aspect-[3/4] bg-neutral-900 border border-neutral-800 shadow-lg group-hover:border-[#24CECE]/50 transition-colors duration-300">
         <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity z-10 duration-300"></div>
         <img src="<?= htmlspecialchars($comedian['image']) ?>" alt="<?= htmlspecialchars($comedian['name']) ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-        <?php if ($comedian['isHeadliner']): ?>
-        <div class="absolute top-4 right-4 z-20">
-          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-[5px] bg-[#24CECE] text-neutral-900 text-xs font-bold uppercase tracking-wide shadow-lg">
-            ★ Headliner
-          </span>
-        </div>
-        <?php endif; ?>
         <div class="absolute bottom-0 left-0 right-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
           <span class="inline-flex items-center gap-1 px-3 py-1 rounded-[5px] bg-white text-neutral-900 text-xs font-bold uppercase tracking-wide mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#24CECE]">
             🎤 View Profile

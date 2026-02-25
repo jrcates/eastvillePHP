@@ -42,10 +42,10 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
-    * { font-family: 'Inter', sans-serif; }
+    * { font-family: 'Montserrat', sans-serif; }
     ::selection { background: #24CECE; color: #111; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -79,6 +79,24 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
     .hero-slide { flex: 0 0 100%; }
     /* Card hover lift */
     .hover-lift:hover { transform: translateY(-2px); }
+    /* All buttons: 40px border radius */
+    button,
+    a[class*="font-bold"][class*="px-"] {
+      border-radius: 40px !important;
+    }
+    /* Contact tab buttons: 5px border radius */
+    a.tab-btn.tab-btn {
+      border-radius: 5px !important;
+    }
+    /* Inner page titles: 62px / 800 weight */
+    .inner-page h1 {
+      font-size: 62px !important;
+      font-weight: 800 !important;
+    }
+    /* Teal buttons: force black text */
+    .bg-\[\#24CECE\] {
+      color: #000000 !important;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-[#171C1C] text-neutral-100">
@@ -148,7 +166,7 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
   </div>
 
   <!-- ─── Main Content ─── -->
-  <main class="view-fade">
+  <main class="view-fade<?= $view !== 'home' ? ' inner-page' : '' ?>">
     <?php
       $viewFile = __DIR__ . "/views/{$view}.php";
       if (file_exists($viewFile)) {
@@ -169,7 +187,7 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
         </div>
         <div class="relative z-10 p-6 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-[72px]">
           <div class="flex-1 max-w-2xl">
-            <h2 class="text-2xl md:text-[52px] font-black text-white leading-tight tracking-tight">
+            <h2 class="text-2xl md:text-[52px] font-extrabold text-white leading-tight tracking-tight">
               For updates and<br />special events,<br />subscribe to our<br />newsletter:
             </h2>
           </div>

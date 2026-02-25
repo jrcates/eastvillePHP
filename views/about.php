@@ -41,12 +41,12 @@
       ['MANHATTAN', 'map-pin', 'Eastville was established in Manhattan in 2008, and after 10 wonderful years, it was time to upgrade our space. Brooklyn\'s explosion in popularity, culture, and nightlife made it the perfect location.'],
       ['INFLUENTIAL COMEDIANS', 'users', 'Many of the most influential comedians to ever take the stage, such as: Jackie Gleason, Chris Rock, Mel Brooks, Joan Rivers, as well as all Three Stooges all hail from Brooklyn.'],
     ] as [$title, $iconPath, $desc]): ?>
-    <div class="bg-[#232828] p-8 rounded-[5px] border border-white/5 hover:border-[#24CECE]/30 transition-colors group">
-      <div class="w-12 h-12 bg-[#24CECE]/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-[#24CECE] transition-colors">
+    <div class="bg-[#3A4655] p-8 rounded-[5px] border border-white/5 hover:border-[#24CECE]/30 transition-colors group">
+      <div class="w-12 h-12 bg-[#535B71] rounded-full flex items-center justify-center mb-6 group-hover:bg-[#24CECE] transition-colors">
         <i data-lucide="<?= $iconPath ?>" class="w-6 h-6 text-[#24CECE] group-hover:text-black transition-colors"></i>
       </div>
       <h3 class="text-xl font-black uppercase mb-4"><?= $title ?></h3>
-      <p class="text-neutral-400 text-sm leading-relaxed"><?= $desc ?></p>
+      <p class="text-[#8B9DB2] text-sm leading-relaxed"><?= $desc ?></p>
     </div>
     <?php endforeach; ?>
   </div>
@@ -54,10 +54,10 @@
   <!-- Bottom Images -->
   <div class="grid md:grid-cols-2 gap-8">
     <div class="h-[300px] md:h-[400px] rounded-[5px] overflow-hidden relative group">
-      <img src="assets/about-img3.jpg" alt="Comedian performing" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" />
+      <img src="assets/about-img3.jpg" alt="Comedian performing" class="w-full h-full object-cover" />
     </div>
     <div class="h-[300px] md:h-[400px] rounded-[5px] overflow-hidden relative group">
-      <img src="assets/about-img4.jpg" alt="Eastville Bar Crowd" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0" />
+      <img src="assets/about-img4.jpg" alt="Eastville Bar Crowd" class="w-full h-full object-cover" />
     </div>
   </div>
 </div>
