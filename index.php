@@ -1,4 +1,4 @@
-on <?php
+<?php
 require_once __DIR__ . '/data.php';
 
 $view = isset($_GET['view']) ? preg_replace('/[^a-z\-]/', '', $_GET['view']) : 'home';
