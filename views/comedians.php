@@ -61,9 +61,9 @@ $current = array_slice($filtered, ($page - 1) * $perPage, $perPage);
     <form method="GET" action="?view=comedians" class="w-full">
       <input type="hidden" name="view" value="comedians" />
       <div class="relative flex items-center bg-neutral-900/80 border border-neutral-700 rounded-[5px] p-2 shadow-2xl focus-within:border-[#24CECE] transition-all group">
-        <i data-lucide="search" class="ml-5 w-6 h-6 text-neutral-500 group-focus-within:text-[#24CECE] transition-colors"></i>
-        <input type="text" name="q" value="<?= $search ?>" placeholder="Search by name..." class="w-full bg-transparent border-none focus:outline-none focus:ring-0 text-lg px-4 text-white placeholder:text-neutral-500 h-12" />
-        <button type="submit" class="bg-[#24CECE] text-neutral-950 font-bold py-3 px-8 rounded-[5px] hover:bg-[#20B8B8] transition-all">Search</button>
+        <i data-lucide="search" class="ml-3 md:ml-5 w-5 h-5 md:w-6 md:h-6 text-neutral-500 group-focus-within:text-[#24CECE] transition-colors shrink-0"></i>
+        <input type="text" name="q" value="<?= $search ?>" placeholder="Search by name..." class="w-full bg-transparent border-none focus:outline-none focus:ring-0 text-base md:text-lg px-3 md:px-4 text-white placeholder:text-neutral-500 h-10 md:h-12 min-w-0" />
+        <button type="submit" class="bg-[#24CECE] text-neutral-950 font-bold py-2.5 md:py-3 px-5 md:px-8 rounded-[5px] hover:bg-[#20B8B8] transition-all shrink-0 text-sm md:text-base">Search</button>
       </div>
     </form>
   </div>

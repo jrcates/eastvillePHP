@@ -90,7 +90,7 @@ $extendedBio = [
 <!-- ─── Header ─── -->
 <div class="pt-[150px] pb-24 max-w-[1200px] mx-auto px-6 min-h-screen">
 
-  <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
     <div>
       <span class="text-[#24CECE] text-sm font-bold uppercase tracking-widest mb-3 block">Artist Spotlight</span>
       <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight">Comedian Profile</h1>
@@ -151,7 +151,7 @@ $extendedBio = [
 
   <!-- ─── Upcoming Appearances ─── -->
   <div class="mb-12">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-10">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
       <div>
         <h2 class="text-3xl font-bold uppercase tracking-wide mb-2">Upcoming Appearances</h2>
         <p class="text-neutral-400">Catch <?= htmlspecialchars($firstName) ?> at these upcoming shows</p>

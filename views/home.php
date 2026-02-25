@@ -112,9 +112,9 @@ $galleryImages = [
 <!-- ─── Upcoming Shows ─── -->
 <section class="py-16 bg-[#171C1C] relative overflow-hidden">
   <div class="max-w-[1200px] mx-auto px-6 relative z-10">
-    <div class="flex justify-between items-end mb-12">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
       <h2 class="text-3xl font-bold uppercase tracking-wide">Upcoming Shows</h2>
-      <a href="?view=schedule" class="px-6 py-2 bg-[#24CECE] text-black font-bold rounded-full uppercase tracking-wider text-xs hover:bg-[#20B8B8] transition-colors">View Entire Schedule</a>
+      <a href="?view=schedule" class="px-6 py-2 bg-[#24CECE] text-black font-bold rounded-full uppercase tracking-wider text-xs hover:bg-[#20B8B8] transition-colors shrink-0">View Entire Schedule</a>
     </div>
     <div class="space-y-4">
       <?php foreach ($upcomingShows as $show):
@@ -154,12 +154,12 @@ $galleryImages = [
 <!-- ─── Our Menu Section ─── -->
 <section class="py-16 bg-[#171C1C]">
   <div class="max-w-[1200px] mx-auto px-6">
-    <div class="flex justify-between items-end mb-12">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
       <div>
         <h2 class="text-3xl font-bold uppercase tracking-wide mb-2">Our Menu</h2>
         <p class="text-neutral-500 text-sm">There is a 1-drink minimum at all of our shows</p>
       </div>
-      <a href="?view=menu" class="px-6 py-2 bg-[#24CECE] text-black font-bold rounded-full uppercase tracking-wider text-xs hover:bg-[#20B8B8] transition-colors">View Menu</a>
+      <a href="?view=menu" class="px-6 py-2 bg-[#24CECE] text-black font-bold rounded-full uppercase tracking-wider text-xs hover:bg-[#20B8B8] transition-colors shrink-0">View Menu</a>
     </div>
     <div class="grid md:grid-cols-3 gap-8">
       <?php foreach ([

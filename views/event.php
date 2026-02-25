@@ -41,14 +41,14 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
 <div class="pt-[140px] pb-24 max-w-[1200px] mx-auto px-6 min-h-screen">
 
   <!-- ─── Tab Navigation ─── -->
-  <div class="flex items-center justify-between mb-6">
-    <div class="flex items-center gap-2">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div class="flex flex-wrap items-center gap-2">
       <a href="?view=schedule" class="flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors px-4 py-2 rounded-[5px] border border-neutral-700 hover:border-neutral-500">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
         Back
       </a>
       <a href="#about-section" class="event-tab text-sm font-medium px-4 py-2 rounded-[5px] border border-neutral-300 bg-white text-black transition-colors">About</a>
-      <a href="#restrictions-section" class="event-tab text-sm font-medium px-4 py-2 rounded-[5px] bg-neutral-800 text-neutral-300 hover:text-white transition-colors">Restrictions &amp; Requirements</a>
+      <a href="#restrictions-section" class="event-tab text-xs md:text-sm font-medium px-3 md:px-4 py-2 rounded-[5px] bg-neutral-800 text-neutral-300 hover:text-white transition-colors">Restrictions</a>
     </div>
     <a href="?view=schedule" class="hidden md:flex items-center gap-1.5 text-sm font-medium text-[#24CECE] hover:text-[#20B8B8] transition-colors">
       See Full Calendar
@@ -66,7 +66,7 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
   <div class="mb-12">
     <div class="event-hero-card">
       <!-- Left Content -->
-      <div class="w-full md:w-[678px] h-full p-10 md:p-12 md:pl-16 flex flex-col justify-center gap-6 bg-white text-neutral-900 relative z-10">
+      <div class="w-full md:w-[678px] h-full p-6 md:p-12 md:pl-16 flex flex-col justify-center gap-6 bg-white text-neutral-900 relative z-10">
         <!-- Date Badge -->
         <div class="flex flex-col items-center w-fit">
           <div class="border border-black rounded-[5px] pt-2 pb-1 px-4 text-center min-w-[80px] bg-white">
@@ -78,7 +78,7 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
         </div>
 
         <div class="space-y-4 max-w-lg relative z-10">
-          <h1 class="text-4xl md:text-5xl font-black uppercase leading-[0.9] tracking-tight text-black"><?= htmlspecialchars($show['title']) ?></h1>
+          <h1 class="text-3xl md:text-5xl font-black uppercase leading-[0.9] tracking-tight text-black"><?= htmlspecialchars($show['title']) ?></h1>
           <div class="inline-flex items-center gap-2 bg-[#F26522] text-white text-sm font-medium px-4 py-2 rounded-[5px] w-fit">
             <i data-lucide="map-pin" class="w-4 h-4"></i>
             EastVille Comedy Club
@@ -90,7 +90,7 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
         <img src="<?= htmlspecialchars($show['image']) ?>" alt="<?= htmlspecialchars($show['title']) ?>" class="w-full h-full object-cover" />
       </div>
       <!-- Mobile Image Fallback -->
-      <div class="md:hidden w-full h-[300px]">
+      <div class="md:hidden w-full h-[200px]">
         <img src="<?= htmlspecialchars($show['image']) ?>" alt="<?= htmlspecialchars($show['title']) ?>" class="w-full h-full object-cover" />
       </div>
     </div>
@@ -100,7 +100,7 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
   <div class="grid lg:grid-cols-12 gap-12">
 
     <!-- ─── Left Column ─── -->
-    <div class="lg:col-span-7 space-y-10">
+    <div class="lg:col-span-7 space-y-10 order-2 lg:order-1">
 
       <!-- ABOUT -->
       <div id="about-section">
@@ -166,7 +166,7 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
     </div>
 
     <!-- ─── Right Column: Purchase Tickets ─── -->
-    <div class="lg:col-span-5">
+    <div class="lg:col-span-5 order-1 lg:order-2">
       <div class="bg-white p-8 rounded-[10px] shadow-xl sticky top-32 text-black space-y-6">
 
         <h2 class="text-2xl font-black uppercase tracking-tight text-black">Purchase Tickets</h2>

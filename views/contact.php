@@ -34,9 +34,9 @@ $success = isset($_POST['form_submitted']) && $_POST['form_submitted'] === '1';
         ['producers','Producers',  'clapperboard'],
       ] as [$id, $label, $iconPath]): ?>
       <a href="?view=contact&tab=<?= $id ?>"
-         class="relative px-6 py-4 rounded-[5px] font-bold flex items-center justify-center gap-2 transition-colors w-full <?= $tab === $id ? 'bg-[#24CECE] text-neutral-900' : 'text-neutral-400 hover:text-white hover:bg-white/5' ?>">
-        <i data-lucide="<?= $iconPath ?>" class="w-5 h-5 shrink-0"></i>
-        <span class="whitespace-nowrap"><?= $label ?></span>
+         class="relative px-3 md:px-6 py-3 md:py-4 rounded-[5px] font-bold flex items-center justify-center gap-1.5 md:gap-2 transition-colors w-full <?= $tab === $id ? 'bg-[#24CECE] text-neutral-900' : 'text-neutral-400 hover:text-white hover:bg-white/5' ?>">
+        <i data-lucide="<?= $iconPath ?>" class="w-4 h-4 md:w-5 md:h-5 shrink-0"></i>
+        <span class="whitespace-nowrap text-xs md:text-sm"><?= $label ?></span>
       </a>
       <?php endforeach; ?>
     </div>

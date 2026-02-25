@@ -2,7 +2,7 @@
 require_once __DIR__ . '/data.php';
 
 $view = isset($_GET['view']) ? preg_replace('/[^a-z\-]/', '', $_GET['view']) : 'home';
-$validViews = ['home','schedule','comedians','gallery','menu','about','contact','openmic','private','gift','merchandise','event','addons','checkout','thank-you'];
+$validViews = ['home','schedule','comedians','comedian','gallery','menu','about','contact','openmic','private','gift','merchandise','event','addons','checkout','thank-you'];
 if (!in_array($view, $validViews)) $view = 'home';
 
 // Asset name aliases
@@ -167,17 +167,17 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
           <img src="<?= $newsletterBgImg ?>" alt="" class="w-full h-full object-cover" />
           <div class="absolute inset-0 bg-black/40"></div>
         </div>
-        <div class="relative z-10 p-10 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-[72px]">
+        <div class="relative z-10 p-6 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-[72px]">
           <div class="flex-1 max-w-2xl">
-            <h2 class="text-3xl md:text-[52px] font-black text-white leading-tight tracking-tight">
+            <h2 class="text-2xl md:text-[52px] font-black text-white leading-tight tracking-tight">
               For updates and<br />special events,<br />subscribe to our<br />newsletter:
             </h2>
           </div>
           <div class="flex-1 w-full max-w-xl flex flex-col justify-center">
-            <p class="text-[#E3E3E3] text-lg leading-loose mb-12 font-medium">With deep roots in comedy and culture, Brooklyn has already become the bedrock of entertainment in New York City.</p>
-            <form class="flex flex-col gap-8" onsubmit="return false;">
-              <input type="email" placeholder="Enter your best email" class="w-full px-8 py-6 bg-white border border-white rounded-[5px] text-black placeholder:text-neutral-400 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-[#24CECE]" />
-              <button type="submit" class="w-fit px-10 py-5 bg-[#24CECE] hover:bg-[#20B8B8] text-black font-bold rounded-full uppercase tracking-wider text-base transition-colors">Subscribe Now</button>
+            <p class="text-[#E3E3E3] text-base md:text-lg leading-loose mb-8 md:mb-12 font-medium">With deep roots in comedy and culture, Brooklyn has already become the bedrock of entertainment in New York City.</p>
+            <form class="flex flex-col gap-4 md:gap-8" onsubmit="return false;">
+              <input type="email" placeholder="Enter your best email" class="w-full px-5 md:px-8 py-4 md:py-6 bg-white border border-white rounded-[5px] text-black placeholder:text-neutral-400 font-medium text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-[#24CECE]" />
+              <button type="submit" class="w-fit px-8 md:px-10 py-4 md:py-5 bg-[#24CECE] hover:bg-[#20B8B8] text-black font-bold rounded-full uppercase tracking-wider text-sm md:text-base transition-colors">Subscribe Now</button>
             </form>
           </div>
         </div>
