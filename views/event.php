@@ -43,16 +43,12 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
   <!-- ─── Tab Navigation ─── -->
   <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
     <div class="flex flex-wrap items-center gap-2">
-      <a href="?view=schedule" class="flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors px-4 py-2 rounded-[5px] border border-neutral-700 hover:border-neutral-500">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-        Back
-      </a>
       <a href="#about-section" class="event-tab text-sm font-medium px-4 py-2 rounded-[5px] border border-neutral-300 bg-white text-black transition-colors">About</a>
       <a href="#restrictions-section" class="event-tab text-xs md:text-sm font-medium px-3 md:px-4 py-2 rounded-[5px] border border-neutral-300 bg-white text-black transition-colors">Restrictions</a>
     </div>
-    <a href="?view=schedule" class="hidden md:flex items-center gap-1.5 text-sm font-medium text-[#24CECE] hover:text-[#20B8B8] transition-colors">
-      See Full Calendar
-      <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    <a href="?view=schedule" class="flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors px-4 py-2 rounded-[5px] border border-neutral-700 hover:border-neutral-500">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      Back
     </a>
   </div>
 

@@ -41,47 +41,17 @@ foreach ($shows as $show) {
 
   <!-- ─── Calendar Filter Bar ─── -->
   <div class="mb-10 sticky top-4 z-40">
-    <div class="bg-neutral-950/90 backdrop-blur-md border border-neutral-800 rounded-[8px] shadow-2xl">
+    <div class="bg-neutral-950/90 backdrop-blur-md border border-neutral-800 rounded-[8px] shadow-2xl relative">
 
-      <!-- All controls in one row on desktop, stacked on mobile -->
+      <!-- Controls -->
       <div class="flex flex-col md:flex-row md:items-center gap-0 p-3">
-        <!-- All Shows + Month Picker row -->
-        <div class="flex items-center gap-3 shrink-0">
-          <!-- All Shows Button -->
-          <button id="filter-all" class="px-5 py-3 rounded-[5px] font-bold text-sm uppercase tracking-wider transition-colors bg-[#24CECE] text-neutral-900 whitespace-nowrap shrink-0">All Shows</button>
-
-          <!-- Month Picker Button -->
-          <div class="relative shrink-0">
-            <button id="month-picker-btn" class="flex items-center gap-2 px-4 py-3 rounded-[5px] bg-neutral-800 text-white font-bold text-sm hover:bg-neutral-700 transition-colors whitespace-nowrap">
-              <i data-lucide="calendar" class="w-4 h-4"></i>
-              <span id="month-picker-label">Feb 2026</span>
-            </button>
-
-            <!-- Dropdown Calendar -->
-            <div id="calendar-dropdown" class="hidden absolute top-full left-0 mt-2 bg-[#1E2323] border border-neutral-700 rounded-[10px] shadow-2xl p-5 w-[280px] md:w-[300px] z-50">
-              <div class="flex items-center justify-between mb-4">
-                <button id="cal-prev-month" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors">
-                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                </button>
-                <span id="cal-month-title" class="text-white font-bold text-base"></span>
-                <button id="cal-next-month" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors">
-                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                </button>
-              </div>
-              <!-- Day headers -->
-              <div class="grid grid-cols-7 gap-1 mb-2">
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">SU</div>
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">MO</div>
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">TU</div>
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">WE</div>
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">TH</div>
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">FR</div>
-                <div class="text-center text-xs font-bold text-neutral-500 py-1">SA</div>
-              </div>
-              <!-- Calendar grid -->
-              <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
-            </div>
-          </div>
+        <!-- All Shows + Month Picker -->
+        <div class="grid grid-cols-2 md:flex md:items-center gap-3 shrink-0">
+          <button id="filter-all" class="px-5 py-3 rounded-[5px] font-bold text-sm uppercase tracking-wider transition-colors bg-[#24CECE] text-neutral-900 whitespace-nowrap text-center">All Shows</button>
+          <button id="month-picker-btn" class="flex items-center justify-center gap-2 px-4 py-3 rounded-[5px] bg-neutral-800 text-white font-bold text-sm hover:bg-neutral-700 transition-colors whitespace-nowrap">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            <span id="month-picker-label">Feb 2026</span>
+          </button>
         </div>
 
         <!-- Week Strip (below on mobile, inline on desktop) -->
@@ -94,6 +64,29 @@ foreach ($shows as $show) {
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
           </button>
         </div>
+      </div>
+
+      <!-- Dropdown Calendar (positioned relative to the filter bar) -->
+      <div id="calendar-dropdown" class="hidden absolute left-1/2 -translate-x-1/2 md:left-3 md:translate-x-0 top-full mt-1 bg-[#1E2323] border border-neutral-700 rounded-[10px] shadow-2xl p-5 w-[calc(100%-24px)] max-w-[300px] md:w-[300px] z-50">
+        <div class="flex items-center justify-between mb-4">
+          <button id="cal-prev-month" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <span id="cal-month-title" class="text-white font-bold text-base"></span>
+          <button id="cal-next-month" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors">
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-7 gap-1 mb-2">
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">SU</div>
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">MO</div>
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">TU</div>
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">WE</div>
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">TH</div>
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">FR</div>
+          <div class="text-center text-xs font-bold text-neutral-500 py-1">SA</div>
+        </div>
+        <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
       </div>
 
     </div>
