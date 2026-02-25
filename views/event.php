@@ -36,6 +36,21 @@ function getInitials(string $name): string {
 }
 
 $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399', '#F97316', '#60A5FA'];
+
+// Generate comedian lookup for linking performers
+$cfn = ["James","Sarah","Michael","Jessica","David","Emily","Robert","Jennifer","William","Elizabeth","Joseph","Maria","Thomas","Lisa","Charles","Ashley"];
+$cln = ["Chen","Johnson","Smith","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson"];
+$comedianLookup = [];
+for ($ci = 0; $ci < 160; $ci++) {
+  $cname = $cfn[$ci % count($cfn)] . ' ' . $cln[(int)floor($ci / count($cfn)) % count($cln)];
+  $comedianLookup[strtolower($cname)] = $ci;
+}
+
+function findComedianId(string $performer, array $lookup): ?int {
+  $clean = preg_replace('/^(Host:\s*|Opener:\s*)/i', '', $performer);
+  $clean = strtolower(trim($clean));
+  return isset($lookup[$clean]) ? $lookup[$clean] : null;
+}
 ?>
 
 <div class="pt-[140px] pb-24 max-w-[1200px] mx-auto px-6 min-h-screen">
@@ -107,21 +122,52 @@ $avatarColors = ['#C084FC', '#9CA3AF', '#F59E0B', '#6B7280', '#EC4899', '#34D399
         <button id="read-more-btn" class="text-[#24CECE] text-sm font-bold mt-3 hover:text-[#20B8B8] transition-colors">Read More...</button>
       </div>
 
-      <!-- FEATURING -->
-      <?php if (!empty($show['lineup'])): ?>
+      <!-- FEATURING (only comedians with profiles, min 3) -->
+      <?php
+        $profiledPerformers = [];
+        $usedIds = [];
+        if (!empty($show['lineup'])) {
+          foreach ($show['lineup'] as $i => $performer) {
+            $cId = findComedianId($performer, $comedianLookup);
+            if ($cId !== null) {
+              $profiledPerformers[] = ['name' => $performer, 'id' => $cId, 'index' => $i];
+              $usedIds[] = $cId;
+            }
+          }
+        }
+        // Fill up to 3 with other comedians based on show ID for consistency
+        $minFeatured = 3;
+        if (count($profiledPerformers) < $minFeatured) {
+          $showSeed = crc32($show['id']);
+          $allIds = array_keys($comedianLookup);
+          $allNames = array_flip($comedianLookup);
+          $needed = $minFeatured - count($profiledPerformers);
+          $offset = abs($showSeed) % 160;
+          for ($fi = 0; $fi < 160 && $needed > 0; $fi++) {
+            $candidateId = ($offset + $fi) % 160;
+            if (!in_array($candidateId, $usedIds)) {
+              $cname = $cfn[$candidateId % count($cfn)] . ' ' . $cln[(int)floor($candidateId / count($cfn)) % count($cln)];
+              $profiledPerformers[] = ['name' => $cname, 'id' => $candidateId, 'index' => count($profiledPerformers)];
+              $usedIds[] = $candidateId;
+              $needed--;
+            }
+          }
+        }
+      ?>
+      <?php if (!empty($profiledPerformers)): ?>
       <div>
         <h2 class="text-lg font-black uppercase tracking-wide text-white mb-6">Featuring</h2>
         <div class="flex flex-wrap gap-5">
-          <?php foreach ($show['lineup'] as $i => $performer):
-            $initials = getInitials($performer);
-            $bgColor = $avatarColors[$i % count($avatarColors)];
+          <?php foreach ($profiledPerformers as $p):
+            $initials = getInitials($p['name']);
+            $bgColor = $avatarColors[$p['index'] % count($avatarColors)];
           ?>
-          <div class="flex flex-col items-center gap-2 w-[130px]">
-            <div class="w-[130px] h-[130px] rounded-[8px] flex items-center justify-center" style="background-color: <?= $bgColor ?>">
+          <a href="?view=comedian&id=<?= $p['id'] ?>" class="flex flex-col items-center gap-2 w-[130px] group">
+            <div class="w-[130px] h-[130px] rounded-[8px] flex items-center justify-center group-hover:ring-2 group-hover:ring-[#24CECE] transition-all" style="background-color: <?= $bgColor ?>">
               <span class="text-4xl font-black text-white tracking-wider"><?= $initials ?></span>
             </div>
-            <span class="text-sm font-bold text-white text-center leading-tight"><?= htmlspecialchars($performer) ?></span>
-          </div>
+            <span class="text-sm font-bold text-white text-center leading-tight group-hover:text-[#24CECE] transition-colors"><?= htmlspecialchars($p['name']) ?></span>
+          </a>
           <?php endforeach; ?>
         </div>
       </div>

@@ -35,7 +35,7 @@ foreach ($shows as $show) {
 
   <!-- Page Title -->
   <div class="mb-8 text-center">
-    <h1 class="text-4xl md:text-5xl font-black text-white mb-3 uppercase tracking-tight">UPCOMING SHOWS</h1>
+    <h1 class="text-4xl md:text-5xl font-black text-white mb-3 uppercase tracking-tight">Upcoming Comedy Shows</h1>
     <p class="text-neutral-400 text-lg max-w-2xl mx-auto">Book your seats for Brooklyn's finest comedy.</p>
   </div>
 
@@ -124,10 +124,6 @@ foreach ($shows as $show) {
               <?php if ($show['status'] === 'Sold Out'): ?>
               <span class="text-xs font-bold uppercase tracking-wider text-red-500 border border-red-500 px-2 py-1 rounded whitespace-nowrap">Sold Out</span>
               <?php endif; ?>
-            </div>
-            <div class="flex items-center gap-2 bg-[#F26522] text-white text-xs font-bold px-3 py-1.5 rounded-[5px] mb-3 w-fit">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-              <span class="uppercase"><?= htmlspecialchars($show['location']) ?>, South Glastonbury, CT</span>
             </div>
             <p class="text-neutral-500 text-sm leading-relaxed line-clamp-2"><?= htmlspecialchars($show['description']) ?></p>
           </div>

@@ -90,8 +90,13 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
     }
     /* Inner page titles: 62px / 800 weight */
     .inner-page h1 {
-      font-size: 62px !important;
+      font-size: 32px !important;
       font-weight: 800 !important;
+    }
+    @media (min-width: 768px) {
+      .inner-page h1 {
+        font-size: 62px !important;
+      }
     }
     /* Teal buttons: force black text */
     .bg-\[\#24CECE\] {

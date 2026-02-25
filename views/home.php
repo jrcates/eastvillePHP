@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../data.php';
 
 $heroShows    = array_slice($shows, 0, 3);
-$upcomingShows = array_slice($shows, 0, 6);
+$upcomingShows = array_slice($shows, 3, 6);
 
 $galleryImages = [
   "assets/super-img2.png",
@@ -78,10 +78,6 @@ $galleryImages = [
 
               <div class="space-y-4 md:space-y-5 max-w-lg mb-4 md:mb-8 relative z-10">
                 <h2 class="text-3xl md:text-5xl font-black uppercase leading-[0.9] tracking-tight text-black"><?= htmlspecialchars($slide['title']) ?></h2>
-                <div class="inline-flex items-center gap-2 bg-[#F26522] text-white text-sm font-medium px-4 py-2 rounded-[5px] w-fit">
-                  <i data-lucide="map-pin" class="w-4 h-4"></i>
-                  <?= htmlspecialchars($slide['location']) ?>
-                </div>
                 <p class="text-neutral-500 text-base md:text-lg leading-relaxed font-normal"><?= htmlspecialchars($slide['description']) ?></p>
                 <a href="?view=event&show=<?= urlencode($slide['id']) ?>" class="inline-block px-8 py-3 bg-[#24CECE] hover:bg-[#20B8B8] text-black font-bold rounded-full text-base transition-all mt-2 hover:-translate-y-0.5">Buy Tickets</a>
               </div>
@@ -113,7 +109,7 @@ $galleryImages = [
 <section class="py-16 bg-[#171C1C] relative overflow-hidden">
   <div class="max-w-[1200px] mx-auto px-6 relative z-10">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
-      <h2 class="text-3xl font-bold uppercase tracking-wide">Upcoming Shows</h2>
+      <h2 class="text-3xl font-bold uppercase tracking-wide">Upcoming Comedy Shows</h2>
       <a href="?view=schedule" class="px-6 py-2 bg-[#24CECE] text-black font-bold rounded-full uppercase tracking-wider text-xs hover:bg-[#20B8B8] transition-colors shrink-0">View Entire Schedule</a>
     </div>
     <div class="space-y-4">
@@ -137,10 +133,6 @@ $galleryImages = [
         <!-- Content -->
         <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left self-center">
           <h3 class="text-[20px] font-extrabold text-black uppercase mb-3"><?= htmlspecialchars($show['title']) ?></h3>
-          <div class="flex items-center gap-2 bg-[#F26522] text-white text-xs font-bold px-3 py-1.5 rounded-[5px] mb-3 w-fit">
-            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-            <span class="uppercase"><?= htmlspecialchars($show['location']) ?>, South Glastonbury, CT</span>
-          </div>
           <p class="text-neutral-500 text-sm leading-relaxed line-clamp-2">Join us for Comedy Night at <?= htmlspecialchars($show['location']) ?>. The show will feature top acts from around the country.</p>
         </div>
         <!-- Button -->
