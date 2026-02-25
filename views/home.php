@@ -155,11 +155,11 @@ $galleryImages = [
     </div>
     <div class="grid md:grid-cols-3 gap-8">
       <?php foreach ([
-        ['SPECIALTY COCKTAILS', 'assets/specialty-cocktail.jpg', 'Eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
-        ['BEERS', 'assets/beers.jpg', 'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor..'],
-        ['NON-ALCOHOLIC', 'assets/non-alcoholic.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod..'],
-      ] as [$title, $img, $desc]): ?>
-      <div class="bg-white rounded-[5px] overflow-hidden group border border-transparent hover:border-[#24CECE]/50 transition-all duration-300">
+        ['SPECIALTY COCKTAILS', 'assets/specialty-cocktail.jpg', 'Eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'specialty-cocktails'],
+        ['BEERS', 'assets/beers.jpg', 'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor..', 'beers'],
+        ['NON-ALCOHOLIC', 'assets/non-alcoholic.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod..', 'non-alcoholic'],
+      ] as [$title, $img, $desc, $anchor]): ?>
+      <a href="?view=menu#<?= $anchor ?>" class="bg-white rounded-[5px] overflow-hidden group border border-transparent hover:border-[#24CECE]/50 transition-all duration-300 block">
         <div class="h-[300px] relative">
           <img src="<?= $img ?>" alt="<?= $title ?>" class="w-full h-full object-cover" />
           <div class="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent"></div>
@@ -167,9 +167,9 @@ $galleryImages = [
         <div class="p-8 bg-white -mt-1 relative z-10">
           <h3 class="text-2xl font-black uppercase tracking-tight text-black mb-4"><?= $title ?></h3>
           <p class="text-neutral-500 text-sm leading-relaxed mb-8"><?= $desc ?></p>
-          <a href="?view=menu" class="inline-block px-8 py-3 bg-[#24CECE] text-black font-bold rounded-full text-sm hover:bg-[#20B8B8] transition-colors shadow-lg shadow-[#24CECE]/20">View Menu</a>
+          <span class="inline-block px-8 py-3 bg-[#24CECE] text-black font-bold rounded-full text-sm hover:bg-[#20B8B8] transition-colors shadow-lg shadow-[#24CECE]/20">View Menu</span>
         </div>
-      </div>
+      </a>
       <?php endforeach; ?>
     </div>
   </div>

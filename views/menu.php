@@ -34,8 +34,8 @@ $nonAlcoholic = [
   ['name'=>'Hot Chocolate','price'=>'$6'],
 ];
 
-function menuSection(string $title, string $iconSvg, array $items, string $image, string $side = 'left'): void { ?>
-<section class="py-12">
+function menuSection(string $title, string $iconSvg, array $items, string $image, string $side = 'left', string $id = ''): void { ?>
+<section class="py-12" <?= $id ? 'id="' . $id . '"' : '' ?>>
   <div class="flex flex-col <?= $side === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row' ?> gap-12 lg:gap-20 items-start">
     <!-- Image -->
     <div class="w-full lg:w-5/12 sticky top-24">
@@ -88,8 +88,8 @@ $coffeeIcon = '<i data-lucide="coffee" class="w-8 h-8"></i>';
   </div>
 
   <div class="w-full mx-auto pb-12">
-    <?php menuSection('Specialty Cocktails', $cocktailIcon, $cocktails, 'assets/drinks-img1.jpg', 'left'); ?>
-    <?php menuSection('Beer & Cider', $beerIcon, $beers, 'assets/drinks-img2.jpg', 'right'); ?>
-    <?php menuSection('Non-Alcoholic', $coffeeIcon, $nonAlcoholic, 'assets/drinks-img3.jpg', 'left'); ?>
+    <?php menuSection('Specialty Cocktails', $cocktailIcon, $cocktails, 'assets/drinks-img1.jpg', 'left', 'specialty-cocktails'); ?>
+    <?php menuSection('Beer & Cider', $beerIcon, $beers, 'assets/drinks-img2.jpg', 'right', 'beers'); ?>
+    <?php menuSection('Non-Alcoholic', $coffeeIcon, $nonAlcoholic, 'assets/drinks-img3.jpg', 'left', 'non-alcoholic'); ?>
   </div>
 </div>
