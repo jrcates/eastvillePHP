@@ -290,7 +290,7 @@ if ($success):
           <div class="rounded-[5px] p-5 border-2 border-[#24CECE]">
             <div class="flex justify-between items-center">
               <span class="text-sm font-bold text-neutral-600 uppercase tracking-wider">You will be charged</span>
-              <span id="checkout-total" class="text-2xl font-black text-[#24CECE]">$<?= number_format($total, 2) ?></span>
+              <span id="checkout-total" class="text-2xl font-extrabold text-black">$<?= number_format($total, 2) ?></span>
             </div>
           </div>
 
