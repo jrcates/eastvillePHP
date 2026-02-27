@@ -152,56 +152,92 @@ $(function () {
   var today = new Date();
   var calMonth = today.getMonth();
   var calYear = today.getFullYear();
-  var weekStart = new Date(today);
-  weekStart.setDate(today.getDate() - today.getDay()); // Start of current week (Sunday)
-  var selectedDate = null; // null = all shows
-  var filterMode = 'all'; // 'all', 'date', 'week'
+  var selectedDate = null; // null = show all in month
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
   function dateStr(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
   function hasShow(d) { return showDates.indexOf(dateStr(d)) !== -1; }
 
-  // ─── Week Strip ───
+  // ─── Month-bounded week helpers ───
+  function getFirstWeekStart(m, y) {
+    var first = new Date(y, m, 1);
+    var ws = new Date(first);
+    ws.setDate(first.getDate() - first.getDay());
+    return ws;
+  }
+  function getLastWeekStart(m, y) {
+    var last = new Date(y, m + 1, 0);
+    var ws = new Date(last);
+    ws.setDate(last.getDate() - last.getDay());
+    return ws;
+  }
+
+  var weekStart = getFirstWeekStart(calMonth, calYear);
+
+  // ─── Week Strip (bounded to current month) ───
   function renderWeekStrip() {
     var $strip = $('#week-strip').empty();
+    var firstWS = getFirstWeekStart(calMonth, calYear);
+    var lastWS = getLastWeekStart(calMonth, calYear);
+
+    // Disable arrows at boundaries
+    $('#week-prev').toggleClass('opacity-30 pointer-events-none', weekStart.getTime() <= firstWS.getTime());
+    $('#week-next').toggleClass('opacity-30 pointer-events-none', weekStart.getTime() >= lastWS.getTime());
+
     for (var i = 0; i < 7; i++) {
       var d = new Date(weekStart);
       d.setDate(weekStart.getDate() + i);
       var ds = dateStr(d);
+      var inMonth = d.getMonth() === calMonth && d.getFullYear() === calYear;
       var isSelected = selectedDate === ds;
       var isToday = ds === dateStr(today);
       var hasEvent = hasShow(d);
 
-      var $day = $('<button class="flex flex-col items-center py-2 px-1.5 md:px-3 rounded-[8px] transition-colors min-w-0 md:min-w-[60px] flex-1 cursor-pointer"></button>');
-      $day.append('<div class="text-[10px] font-bold tracking-wider ' + (isSelected ? 'text-black' : 'text-neutral-500') + '">' + dayNames[d.getDay()] + '</div>');
-      $day.append('<div class="text-xl font-black ' + (isSelected ? 'text-black' : 'text-white') + '">' + d.getDate() + '</div>');
-      if (hasEvent) {
-        $day.append('<div class="w-1.5 h-1.5 rounded-full mt-1 ' + (isSelected ? 'bg-[#F26522]' : 'bg-[#F26522]') + '"></div>');
-      } else {
+      var $day = $('<button class="flex flex-col items-center py-2 px-1.5 md:px-3 rounded-[8px] transition-colors min-w-0 md:min-w-[60px] flex-1"></button>');
+
+      // Dim days outside current month
+      if (!inMonth) {
+        $day.addClass('opacity-25 cursor-default');
+        $day.append('<div class="text-[10px] font-bold tracking-wider text-neutral-600">' + dayNames[d.getDay()] + '</div>');
+        $day.append('<div class="text-xl font-black text-neutral-600">' + d.getDate() + '</div>');
         $day.append('<div class="w-1.5 h-1.5 mt-1"></div>');
-      }
-
-      if (isSelected) {
-        $day.addClass('bg-[#24CECE]');
-      } else if (isToday) {
-        $day.addClass('bg-neutral-800');
       } else {
-        $day.addClass('hover:bg-neutral-800');
+        $day.addClass('cursor-pointer');
+        $day.append('<div class="text-[10px] font-bold tracking-wider ' + (isSelected ? 'text-black' : 'text-neutral-500') + '">' + dayNames[d.getDay()] + '</div>');
+        $day.append('<div class="text-xl font-black ' + (isSelected ? 'text-black' : 'text-white') + '">' + d.getDate() + '</div>');
+        if (hasEvent) {
+          $day.append('<div class="w-1.5 h-1.5 rounded-full mt-1 bg-[#F26522]"></div>');
+        } else {
+          $day.append('<div class="w-1.5 h-1.5 mt-1"></div>');
+        }
+
+        if (isSelected) {
+          $day.addClass('bg-[#24CECE]');
+        } else if (isToday) {
+          $day.addClass('bg-neutral-800');
+        } else {
+          $day.addClass('hover:bg-neutral-800');
+        }
+
+        $day.data('date', ds);
       }
 
-      $day.data('date', ds);
       $strip.append($day);
     }
 
-    // Click handler for week strip days
+    // Click handler for in-month days only
     $strip.find('button').on('click', function () {
       var clickedDate = $(this).data('date');
+      if (!clickedDate) return; // outside month
       if (selectedDate === clickedDate) {
-        // Deselect — show all
-        showAll();
+        // Deselect — show all in month
+        selectedDate = null;
+        updateFilterUI();
+        filterShows();
+        renderWeekStrip();
+        renderCalendar();
       } else {
         selectedDate = clickedDate;
-        filterMode = 'date';
         updateFilterUI();
         filterShows();
         renderWeekStrip();
@@ -218,7 +254,6 @@ $(function () {
     var firstDay = new Date(calYear, calMonth, 1).getDay();
     var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
 
-    // Empty cells before first day
     for (var i = 0; i < firstDay; i++) {
       $grid.append('<div></div>');
     }
@@ -249,7 +284,6 @@ $(function () {
       $cell.on('click', function () {
         var clickedDate = $(this).data('date');
         selectedDate = clickedDate;
-        filterMode = 'date';
 
         // Move week strip to contain this date
         var sel = new Date(clickedDate);
@@ -267,14 +301,21 @@ $(function () {
     }
   }
 
-  // ─── Filter Shows ───
+  // ─── Filter Shows (always by month, optionally by date) ───
   function filterShows() {
-    if (filterMode === 'all') {
-      $('.show-group').show();
-      $('.show-card').show();
-    } else if (filterMode === 'date') {
-      $('.show-group').each(function () {
-        var $group = $(this);
+    var monthLabel = shortMonths[calMonth] + ' ' + calYear;
+    $('.show-group').each(function () {
+      var $group = $(this);
+      var groupMonth = $group.data('month');
+
+      // Hide groups not in current month
+      if (groupMonth !== monthLabel) {
+        $group.hide();
+        return;
+      }
+
+      // If a specific date is selected, filter cards within the month
+      if (selectedDate) {
         var $cards = $group.find('.show-card');
         var hasVisible = false;
         $cards.each(function () {
@@ -286,21 +327,27 @@ $(function () {
           }
         });
         if (hasVisible) $group.show(); else $group.hide();
-      });
-    }
+      } else {
+        $group.show();
+        $group.find('.show-card').show();
+      }
+    });
   }
 
-  function showAll() {
+  // ─── Switch month (resets date selection & strip) ───
+  function setMonth(m, y) {
+    calMonth = m;
+    calYear = y;
     selectedDate = null;
-    filterMode = 'all';
+    weekStart = getFirstWeekStart(m, y);
     updateFilterUI();
-    filterShows();
     renderWeekStrip();
     renderCalendar();
+    filterShows();
   }
 
   function updateFilterUI() {
-    if (filterMode === 'all') {
+    if (!selectedDate) {
       $('#filter-all').addClass('bg-[#24CECE] text-neutral-900').removeClass('text-neutral-400 bg-transparent');
     } else {
       $('#filter-all').removeClass('bg-[#24CECE] text-neutral-900').addClass('text-neutral-400');
@@ -310,8 +357,14 @@ $(function () {
 
   // ─── Event Handlers ───
 
-  // All Shows button
-  $('#filter-all').on('click', function () { showAll(); });
+  // All Shows button — show all in current month
+  $('#filter-all').on('click', function () {
+    selectedDate = null;
+    updateFilterUI();
+    filterShows();
+    renderWeekStrip();
+    renderCalendar();
+  });
 
   // Month picker toggle
   $('#month-picker-btn').on('click', function (e) {
@@ -326,26 +379,28 @@ $(function () {
     }
   });
 
-  // Calendar month navigation
+  // Calendar month navigation — switches displayed month
   $('#cal-prev-month').on('click', function () {
-    calMonth--;
-    if (calMonth < 0) { calMonth = 11; calYear--; }
-    updateFilterUI();
-    renderCalendar();
+    var m = calMonth - 1, y = calYear;
+    if (m < 0) { m = 11; y--; }
+    setMonth(m, y);
   });
   $('#cal-next-month').on('click', function () {
-    calMonth++;
-    if (calMonth > 11) { calMonth = 0; calYear++; }
-    updateFilterUI();
-    renderCalendar();
+    var m = calMonth + 1, y = calYear;
+    if (m > 11) { m = 0; y++; }
+    setMonth(m, y);
   });
 
-  // Week strip navigation
+  // Week strip navigation — bounded to current month
   $('#week-prev').on('click', function () {
+    var firstWS = getFirstWeekStart(calMonth, calYear);
+    if (weekStart.getTime() <= firstWS.getTime()) return;
     weekStart.setDate(weekStart.getDate() - 7);
     renderWeekStrip();
   });
   $('#week-next').on('click', function () {
+    var lastWS = getLastWeekStart(calMonth, calYear);
+    if (weekStart.getTime() >= lastWS.getTime()) return;
     weekStart.setDate(weekStart.getDate() + 7);
     renderWeekStrip();
   });
@@ -354,5 +409,6 @@ $(function () {
   updateFilterUI();
   renderWeekStrip();
   renderCalendar();
+  filterShows();
 });
 </script>

@@ -69,7 +69,7 @@ function findComedianId(string $performer, array $lookup): ?int {
 
   <!-- ─── Hero Banner (matches homepage carousel card) ─── -->
   <style>
-    .event-hero-card { width: 100%; height: 420px; display: flex; background: white; border-radius: 5px; overflow: hidden; position: relative; }
+    .event-hero-card { width: 100%; min-height: 420px; display: flex; background: white; border-radius: 5px; overflow: hidden; position: relative; }
     @media (max-width: 1280px) {
       .event-hero-card { height: auto; flex-direction: column; }
     }
@@ -171,6 +171,13 @@ function findComedianId(string $performer, array $lookup): ?int {
           <?php endforeach; ?>
         </div>
       </div>
+      <?php endif; ?>
+
+      <!-- SERIES BANNER -->
+      <?php if (!empty($show['series'])): ?>
+      <a href="?view=series&name=<?= urlencode($show['series']) ?>" class="block w-full bg-[#F26522] hover:bg-[#D9551A] transition-colors text-white font-semibold text-center py-3.5 px-6 rounded-[8px] text-sm md:text-base">
+        This event is part of: <?= htmlspecialchars($show['series']) ?>!
+      </a>
       <?php endif; ?>
 
       <!-- RESTRICTIONS & REQUIREMENTS -->

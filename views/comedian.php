@@ -103,7 +103,7 @@ $extendedBio = [
 
   <!-- ─── Profile Card ─── -->
   <div class="rounded-[5px] overflow-hidden mb-20">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
       <!-- Photo -->
       <div class="lg:col-span-5">
         <div class="aspect-[3/4] w-full">
