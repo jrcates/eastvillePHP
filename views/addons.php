@@ -128,7 +128,7 @@ $addons = [
           </div>
           <div class="flex justify-between text-base font-bold text-black">
             <span>Add-ons Total</span>
-            <span id="addons-total" class="text-[#24CECE]">$0.00</span>
+            <span id="addons-total" class="text-black">$0.00</span>
           </div>
         </div>
 

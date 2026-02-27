@@ -224,7 +224,7 @@ function findComedianId(string $performer, array $lookup): ?int {
         <div class="border border-neutral-200 rounded-[8px] p-5">
           <div class="flex items-center justify-between mb-1">
             <span class="font-bold text-black text-lg">General Admission</span>
-            <span class="text-xl font-black text-[#24CECE]"><?= htmlspecialchars($show['price']) ?></span>
+            <span class="text-xl font-black text-black"><?= htmlspecialchars($show['price']) ?></span>
           </div>
           <p class="text-sm text-neutral-400">Standard seating</p>
         </div>
