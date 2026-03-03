@@ -3,7 +3,7 @@ require_once __DIR__ . '/../data.php';
 
 $success = isset($_POST['checkout_submitted']) && $_POST['checkout_submitted'] === '1';
 $showId = isset($_GET['show']) ? $_GET['show'] : null;
-$quantity = isset($_GET['qty']) ? max(1, intval($_GET['qty'])) : 1;
+$promoCode = isset($_GET['promo']) ? preg_replace('/[^A-Za-z0-9]/', '', $_GET['promo']) : '';
 $addonsTotal = isset($_GET['addons']) ? floatval($_GET['addons']) : 0;
 $addonItems = [];
 if (isset($_GET['addon_items']) && $_GET['addon_items'] !== '') {
@@ -16,18 +16,47 @@ if (isset($_GET['addon_items']) && $_GET['addon_items'] !== '') {
 }
 
 $show = null;
-$pricePerTicket = 25.00;
 foreach ($shows as $s) {
   if ($s['id'] === $showId) {
     $show = $s;
-    $pricePerTicket = floatval($s['priceValue']);
     break;
   }
 }
 
-$subtotal = $pricePerTicket * $quantity;
+// Parse ticket types from URL: tickets=general:1|frontrow:0|vip:0
+$ticketTypeInfo = [
+  'general'  => ['name' => 'General Admission',  'price' => $show ? floatval($show['priceValue']) : 15],
+  'frontrow' => ['name' => 'Front Row Seats',     'price' => 45],
+  'vip'      => ['name' => 'Gold Front Row VIP',  'price' => 55],
+];
+$ticketItems = [];
+$ticketsParam = isset($_GET['tickets']) ? $_GET['tickets'] : 'general:1';
+foreach (explode('|', $ticketsParam) as $part) {
+  $pieces = explode(':', $part);
+  if (count($pieces) === 2 && isset($ticketTypeInfo[$pieces[0]])) {
+    $qty = max(0, intval($pieces[1]));
+    if ($qty > 0) {
+      $ticketItems[] = [
+        'key'   => $pieces[0],
+        'name'  => $ticketTypeInfo[$pieces[0]]['name'],
+        'price' => $ticketTypeInfo[$pieces[0]]['price'],
+        'qty'   => $qty,
+      ];
+    }
+  }
+}
+if (empty($ticketItems)) {
+  $ticketItems[] = ['key' => 'general', 'name' => 'General Admission', 'price' => $ticketTypeInfo['general']['price'], 'qty' => 1];
+}
+
+$subtotal = 0;
+$totalTicketCount = 0;
+foreach ($ticketItems as $ti) {
+  $subtotal += $ti['price'] * $ti['qty'];
+  $totalTicketCount += $ti['qty'];
+}
+$serviceFee = $subtotal * 0.10;
 $tax = ($subtotal + $addonsTotal) * 0.08875;
-$serviceFee = 3.50 * $quantity;
 $total = $subtotal + $addonsTotal + $tax + $serviceFee;
 ?>
 
@@ -155,14 +184,16 @@ if ($success):
           Order Summary
         </h2>
 
-        <!-- Ticket -->
+        <!-- Tickets -->
+        <?php foreach ($ticketItems as $ti): ?>
         <div class="flex items-center justify-between py-4 border-b border-neutral-700">
           <div>
-            <div class="font-bold text-white">General Admission</div>
-            <div class="text-xs text-[#94A0AF] mt-0.5"><?= $quantity ?> x $<?= number_format($pricePerTicket, 2) ?></div>
+            <div class="font-bold text-white"><?= htmlspecialchars($ti['name']) ?></div>
+            <div class="text-xs text-[#94A0AF] mt-0.5"><?= $ti['qty'] ?> x $<?= number_format($ti['price'], 2) ?></div>
           </div>
-          <span class="font-bold text-white">$<?= number_format($subtotal, 2) ?></span>
+          <span class="font-bold text-white">$<?= number_format($ti['price'] * $ti['qty'], 2) ?></span>
         </div>
+        <?php endforeach; ?>
 
         <!-- Add-ons -->
         <?php if (!empty($addonItems)): ?>
@@ -185,7 +216,7 @@ if ($success):
         <!-- Total -->
         <div class="py-4 border-b border-neutral-700 space-y-2">
           <div id="promo-discount-row" class="hidden flex justify-between text-sm text-green-400">
-            <span>Promo Code (5%)</span>
+            <span id="promo-discount-label">Promo Code (5%)</span>
             <span id="promo-discount-amount">-$0.00</span>
           </div>
           <div id="gift-discount-row" class="hidden flex justify-between text-sm text-green-400">
@@ -306,13 +337,21 @@ if ($success):
 <script>
 $(function () {
   var baseTotal = <?= $total ?>;
-  var promoApplied = false;
+  var totalTicketCount = <?= $totalTicketCount ?>;
+  var promoApplied = false; // false, 'percent5', or 'flat2'
   var giftApplied = false;
 
   function updateTotals() {
     var total = baseTotal;
     if (promoApplied) {
-      var promoDiscount = baseTotal * 0.05;
+      var promoDiscount = 0;
+      if (promoApplied === 'percent5') {
+        promoDiscount = baseTotal * 0.05;
+        $('#promo-discount-label').text('Promo Code 1111 (5%)');
+      } else if (promoApplied === 'flat2') {
+        promoDiscount = 2 * totalTicketCount;
+        $('#promo-discount-label').text('Promo Code EE001 ($2 x ' + totalTicketCount + ')');
+      }
       $('#promo-discount-amount').text('-$' + promoDiscount.toFixed(2));
       $('#promo-discount-row').removeClass('hidden');
       total -= promoDiscount;
@@ -327,6 +366,7 @@ $(function () {
     } else {
       $('#gift-discount-row').addClass('hidden');
     }
+    if (total < 0) total = 0;
     $('#order-total, #checkout-total').text('$' + total.toFixed(2));
   }
 
@@ -342,11 +382,15 @@ $(function () {
   });
 
   $('#promo-apply-btn').on('click', function () {
-    var code = $('#promo-code-input').val().trim();
+    var code = $('#promo-code-input').val().trim().toUpperCase();
     if (code === '1111') {
-      promoApplied = true;
+      promoApplied = 'percent5';
       updateTotals();
       $('#promo-msg').removeClass('hidden text-red-500').addClass('text-green-400').text('Promo code applied! 5% discount.');
+    } else if (code === 'EE001') {
+      promoApplied = 'flat2';
+      updateTotals();
+      $('#promo-msg').removeClass('hidden text-red-500').addClass('text-green-400').text('Promo code applied! $2 off per ticket.');
     } else {
       promoApplied = false;
       updateTotals();
@@ -393,6 +437,15 @@ $(function () {
     $('#checkout-step1').removeClass('hidden');
     $('html, body').animate({ scrollTop: 0 }, 300);
   });
+
+  // Auto-apply promo code from URL param
+  <?php if (strtoupper($promoCode) === 'EE001'): ?>
+  (function () {
+    $('#promo-toggle').prop('checked', true).trigger('change');
+    $('#promo-code-input').val('EE001');
+    $('#promo-apply-btn').trigger('click');
+  })();
+  <?php endif; ?>
 
   // On resize, ensure both columns show on desktop
   $(window).on('resize', function () {

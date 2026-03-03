@@ -2,19 +2,39 @@
 require_once __DIR__ . '/../data.php';
 
 $showId = isset($_GET['show']) ? $_GET['show'] : null;
-$ticketQty = isset($_GET['qty']) ? max(1, intval($_GET['qty'])) : 1;
-$ticketPrice = 0;
+$promoCode = isset($_GET['promo']) ? preg_replace('/[^A-Za-z0-9]/', '', $_GET['promo']) : '';
 $show = null;
 
 foreach ($shows as $s) {
   if ($s['id'] === $showId) {
     $show = $s;
-    $ticketPrice = $s['priceValue'];
     break;
   }
 }
 
-$ticketSubtotal = $ticketPrice * $ticketQty;
+// Parse ticket types from URL: tickets=general:1|frontrow:0|vip:0
+$ticketPrices = [
+  'general'  => $show ? $show['priceValue'] : 15,
+  'frontrow' => 45,
+  'vip'      => 55,
+];
+$ticketData = [];
+$ticketsParam = isset($_GET['tickets']) ? $_GET['tickets'] : 'general:1';
+foreach (explode('|', $ticketsParam) as $part) {
+  $pieces = explode(':', $part);
+  if (count($pieces) === 2 && isset($ticketPrices[$pieces[0]])) {
+    $ticketData[$pieces[0]] = max(0, intval($pieces[1]));
+  }
+}
+// Ensure at least general:1 if nothing parsed
+if (empty($ticketData)) {
+  $ticketData['general'] = 1;
+}
+
+$ticketSubtotal = 0;
+foreach ($ticketData as $key => $qty) {
+  $ticketSubtotal += $ticketPrices[$key] * $qty;
+}
 
 $addons = [
   [
@@ -63,7 +83,7 @@ $addons = [
       <h1 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">ENHANCE YOUR NIGHT</h1>
       <p class="text-neutral-400 text-base mt-2">Add food &amp; drinks to your order — or skip ahead to complete your purchase.</p>
     </div>
-    <a href="?view=event&show=<?= urlencode($showId) ?>" class="flex items-center gap-2 text-sm font-bold text-neutral-400 hover:text-white bg-neutral-900 hover:bg-neutral-800 px-5 py-3 rounded-[5px] transition-all border border-neutral-800 whitespace-nowrap">
+    <a href="?view=event&show=<?= urlencode($showId) ?><?= $promoCode ? '&promo=' . urlencode($promoCode) : '' ?>" class="flex items-center gap-2 text-sm font-bold text-neutral-400 hover:text-white bg-neutral-900 hover:bg-neutral-800 px-5 py-3 rounded-[5px] transition-all border border-neutral-800 whitespace-nowrap">
       <i data-lucide="arrow-left" class="w-4 h-4"></i>
       Back to Event
     </a>
@@ -149,8 +169,7 @@ $addons = [
 <script>
 $(function () {
   var showId = '<?= htmlspecialchars($showId) ?>';
-  var ticketQty = <?= $ticketQty ?>;
-  var ticketPrice = <?= $ticketPrice ?>;
+  var ticketsParam = '<?= htmlspecialchars($ticketsParam) ?>';
 
   function updateSummary() {
     var total = 0;
@@ -183,7 +202,8 @@ $(function () {
     $('#addons-total').text('$' + total.toFixed(2));
 
     // Build checkout URL with addon total and item details
-    var url = '?view=checkout&show=' + encodeURIComponent(showId) + '&qty=' + ticketQty + '&addons=' + total.toFixed(2);
+    var promoParam = '<?= $promoCode ? "&promo=" . urlencode($promoCode) : "" ?>';
+    var url = '?view=checkout&show=' + encodeURIComponent(showId) + '&tickets=' + encodeURIComponent(ticketsParam) + '&addons=' + total.toFixed(2);
     var addonItems = [];
     $('.addon-card').each(function () {
       var qty = parseInt($(this).find('.addon-qty').text());
@@ -194,6 +214,7 @@ $(function () {
     if (addonItems.length > 0) {
       url += '&addon_items=' + encodeURIComponent(addonItems.join('|'));
     }
+    url += promoParam;
     $('#continue-checkout').attr('href', url);
   }
 

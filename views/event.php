@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../data.php';
 
 $showId = isset($_GET['show']) ? $_GET['show'] : null;
+$promoCode = isset($_GET['promo']) ? preg_replace('/[^A-Za-z0-9]/', '', $_GET['promo']) : '';
 $show = null;
 
 foreach ($shows as $s) {
@@ -23,6 +24,7 @@ if (!$show) {
 $d = formatShowDate($show['date']);
 $isSoldOut = $show['status'] === 'Sold Out';
 $priceValue = $show['priceValue'];
+$isPromoFlat2 = strtoupper($promoCode) === 'EE001';
 
 // Generate initials from performer name
 function getInitials(string $name): string {
@@ -220,40 +222,105 @@ function findComedianId(string $performer, array $lookup): ?int {
 
         <h2 class="text-2xl font-black uppercase tracking-tight text-black">Purchase Tickets</h2>
 
-        <!-- Ticket Type -->
-        <div class="border border-neutral-200 rounded-[8px] p-5">
-          <div class="flex items-center justify-between mb-1">
-            <span class="font-bold text-black text-lg">General Admission</span>
-            <span class="text-xl font-black text-black"><?= htmlspecialchars($show['price']) ?></span>
-          </div>
-          <p class="text-sm text-neutral-400">Standard seating</p>
-        </div>
-
-        <!-- Quantity -->
         <?php if (!$isSoldOut): ?>
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-bold uppercase tracking-wider text-neutral-500">Quantity</span>
-          <div class="flex items-center gap-3">
-            <button id="qty-minus" class="w-9 h-9 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-400 hover:border-neutral-500 hover:text-black transition-colors">
-              <i data-lucide="minus" class="w-4 h-4"></i>
-            </button>
-            <input id="qty-input" type="text" value="1" readonly class="w-12 text-center font-bold text-lg border border-neutral-300 rounded-[5px] py-1" />
-            <button id="qty-plus" class="w-9 h-9 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-400 hover:border-neutral-500 hover:text-black transition-colors">
-              <i data-lucide="plus" class="w-4 h-4"></i>
-            </button>
+        <!-- General Admission -->
+        <div class="ticket-box border-2 border-[#24CECE] bg-[#F0FDFD] rounded-[8px] p-5 transition-all duration-200" data-key="general" data-price="<?= $priceValue ?>">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-black text-lg">General Admission</span>
+            <span class="ticket-total text-xl font-black text-black">$<?= number_format($priceValue * 1.10, 2) ?></span>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <div>
+              <p class="text-sm text-neutral-400 ticket-breakdown">$<?= number_format($priceValue, 2) ?> + $<?= number_format($priceValue * 0.10, 2) ?> Service Fee</p>
+              <p class="text-sm text-neutral-400">Standard seating</p>
+            </div>
+            <div class="inline-flex items-center border border-neutral-200 rounded-[8px] overflow-hidden shrink-0 ml-4">
+              <button class="ticket-minus w-10 h-10 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 transition-colors">
+                <i data-lucide="minus" class="w-4 h-4"></i>
+              </button>
+              <span class="ticket-qty w-12 text-center font-bold text-lg text-black border-l border-r border-neutral-200">1</span>
+              <button class="ticket-plus w-10 h-10 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Total -->
-        <div class="flex items-center justify-between pt-4 border-t border-neutral-200">
-          <span class="text-base font-medium text-neutral-600">Total</span>
-          <span id="total-price" class="text-2xl font-black text-black"><?= htmlspecialchars($show['price']) ?></span>
+        <!-- Front Row Seats -->
+        <div class="ticket-box border border-neutral-200 rounded-[8px] p-5 transition-all duration-200" data-key="frontrow" data-price="45">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-black text-lg">Front Row Seats</span>
+            <span class="ticket-total text-xl font-black text-black">$<?= number_format(45 * 1.10, 2) ?></span>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <div>
+              <p class="text-sm text-neutral-400 ticket-breakdown">$45.00 + $4.50 Service Fee</p>
+              <p class="text-sm text-neutral-400">Guaranteed front row seating</p>
+            </div>
+            <div class="inline-flex items-center border border-neutral-200 rounded-[8px] overflow-hidden shrink-0 ml-4">
+              <button class="ticket-minus w-10 h-10 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 transition-colors">
+                <i data-lucide="minus" class="w-4 h-4"></i>
+              </button>
+              <span class="ticket-qty w-12 text-center font-bold text-lg text-black border-l border-r border-neutral-200">0</span>
+              <button class="ticket-plus w-10 h-10 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
+        <!-- Gold Front Row VIP -->
+        <div class="ticket-box border border-neutral-200 rounded-[8px] p-5 transition-all duration-200" data-key="vip" data-price="55">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-black text-lg">Gold Front Row VIP</span>
+            <span class="ticket-total text-xl font-black text-black">$<?= number_format(55 * 1.10, 2) ?></span>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <div>
+              <p class="text-sm text-neutral-400 ticket-breakdown">$55.00 + $5.50 Service Fee</p>
+              <p class="text-sm text-neutral-400">VIP front row with priority check-in</p>
+            </div>
+            <div class="inline-flex items-center border border-neutral-200 rounded-[8px] overflow-hidden shrink-0 ml-4">
+              <button class="ticket-minus w-10 h-10 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 transition-colors">
+                <i data-lucide="minus" class="w-4 h-4"></i>
+              </button>
+              <span class="ticket-qty w-12 text-center font-bold text-lg text-black border-l border-r border-neutral-200">0</span>
+              <button class="ticket-plus w-10 h-10 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Promo Discount -->
+        <?php if ($isPromoFlat2): ?>
+        <div id="promo-discount-row" class="flex items-center justify-between text-sm text-green-600 px-1">
+          <span id="promo-discount-label">Promo EE001 ($2 x 1)</span>
+          <span id="promo-discount-amount">-$2.00</span>
+        </div>
+        <?php endif; ?>
+
+        <!-- Grand Total -->
+        <div class="border-t border-neutral-200 pt-4">
+          <div class="flex items-center justify-between">
+            <span class="text-lg font-black text-black uppercase">Total</span>
+            <span id="grand-total" class="text-2xl font-black text-black">$<?= $isPromoFlat2 ? number_format(($priceValue * 1.10) - 2, 2) : number_format($priceValue * 1.10, 2) ?></span>
+          </div>
+        </div>
+
+        <?php if ($isPromoFlat2): ?>
+        <div class="bg-[#F26522]/10 border border-[#F26522] rounded-[8px] p-3 text-center">
+          <p class="text-[#F26522] font-bold text-sm">
+            <i data-lucide="sparkles" class="w-4 h-4 inline-block align-middle mr-1"></i>
+            Promo EE001 applied &mdash; $2 off per ticket!
+          </p>
+        </div>
+        <?php else: ?>
         <p class="text-xs text-neutral-400 text-center">* Promo codes can be added in the next step</p>
+        <?php endif; ?>
 
         <!-- Checkout Button -->
-        <a href="?view=addons&show=<?= urlencode($show['id']) ?>&qty=1" id="checkout-btn" class="block w-full py-4 bg-[#24CECE] text-black font-black text-base uppercase tracking-wider rounded-[8px] hover:bg-[#20B8B8] transition-colors text-center">Checkout</a>
+        <a href="?view=addons&show=<?= urlencode($show['id']) ?>&tickets=general:1|frontrow:0|vip:0<?= $promoCode ? '&promo=' . urlencode($promoCode) : '' ?>" id="checkout-btn" class="block w-full py-4 bg-[#24CECE] text-black font-black text-base uppercase tracking-wider rounded-[8px] hover:bg-[#20B8B8] transition-colors text-center">Checkout</a>
 
         <p class="text-xs text-neutral-400 text-center flex items-center justify-center gap-1.5">
           <i data-lucide="lock" class="w-3.5 h-3.5"></i>
@@ -277,23 +344,72 @@ function findComedianId(string $performer, array $lookup): ?int {
 <!-- ─── Event Page JS ─── -->
 <script>
 $(function () {
-  var price = <?= $priceValue ?>;
-  var qty = 1;
   var maxQty = 10;
+  var promoFlat2 = <?= $isPromoFlat2 ? 'true' : 'false' ?>;
 
-  function updateTotal() {
-    var total = price * qty;
-    $('#total-price').text('$' + total);
-    $('#qty-input').val(qty);
-    $('#checkout-btn').attr('href', '?view=addons&show=<?= urlencode($show['id']) ?>&qty=' + qty);
+  function highlightCard($box) {
+    var qty = parseInt($box.find('.ticket-qty').text());
+    if (qty > 0) {
+      $box.removeClass('border border-neutral-200').addClass('border-2 border-[#24CECE] bg-[#F0FDFD]');
+    } else {
+      $box.removeClass('border-2 border-[#24CECE] bg-[#F0FDFD]').addClass('border border-neutral-200');
+    }
   }
 
-  $('#qty-minus').on('click', function () {
-    if (qty > 1) { qty--; updateTotal(); }
+  function updateAllTotals() {
+    var grandTotal = 0;
+    var totalQty = 0;
+    var ticketParts = [];
+
+    $('.ticket-box').each(function () {
+      var $box = $(this);
+      var price = parseFloat($box.data('price'));
+      var qty = parseInt($box.find('.ticket-qty').text());
+      var key = $box.data('key');
+      var unitPrice = price * 1.10;
+      var subtotal = price * qty;
+      var fee = subtotal * 0.10;
+      var boxTotal = subtotal + fee;
+
+      $box.find('.ticket-total').text('$' + unitPrice.toFixed(2));
+      grandTotal += boxTotal;
+      totalQty += qty;
+      ticketParts.push(key + ':' + qty);
+      highlightCard($box);
+    });
+
+    if (promoFlat2) {
+      var discount = 2 * totalQty;
+      grandTotal -= discount;
+      if (grandTotal < 0) grandTotal = 0;
+      $('#promo-discount-label').text('Promo EE001 ($2 x ' + totalQty + ')');
+      $('#promo-discount-amount').text('-$' + discount.toFixed(2));
+    }
+
+    $('#grand-total').text('$' + grandTotal.toFixed(2));
+    $('#checkout-btn').attr('href', '?view=addons&show=<?= urlencode($show['id']) ?>&tickets=' + ticketParts.join('|') + '<?= $promoCode ? "&promo=" . urlencode($promoCode) : "" ?>');
+  }
+
+  $('.ticket-box').on('click', '.ticket-minus', function () {
+    var $box = $(this).closest('.ticket-box');
+    var $qty = $box.find('.ticket-qty');
+    var val = parseInt($qty.text());
+    // Active type (the one with qty > 0) cannot go below 1
+    if (val > 1) { $qty.text(val - 1); updateAllTotals(); }
   });
 
-  $('#qty-plus').on('click', function () {
-    if (qty < maxQty) { qty++; updateTotal(); }
+  $('.ticket-box').on('click', '.ticket-plus', function () {
+    var $box = $(this).closest('.ticket-box');
+    var $qty = $box.find('.ticket-qty');
+    var val = parseInt($qty.text());
+    if (val < maxQty) {
+      // Reset all other ticket types to 0
+      $('.ticket-box').not($box).each(function () {
+        $(this).find('.ticket-qty').text('0');
+      });
+      $qty.text(val + 1);
+      updateAllTotals();
+    }
   });
 
   // Read More / Read Less toggle
