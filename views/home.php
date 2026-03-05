@@ -5,13 +5,13 @@ $heroShows    = array_slice($shows, 0, 3);
 $upcomingShows = array_slice($shows, 3, 6);
 
 $galleryImages = [
-  "assets/super-img2.png",
-  "assets/super-img3.png",
-  "assets/super-img4.png",
-  "assets/super-img5.png",
-  "assets/super-img6.png",
-  "assets/super-img7.png",
-  "assets/super-img8.png",
+  "assets/newgal-img1.jpg",
+  "assets/newgal-img12.jpg",
+  "assets/newgal-img3.jpg",
+  "assets/newgal-img4.jpg",
+  "assets/newgal-img5.jpg",
+  "assets/newgal-img6.jpg",
+  "assets/newgal-img9.jpg",
 ];
 ?>
 
@@ -149,7 +149,7 @@ $galleryImages = [
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
       <div>
         <h2 class="text-3xl font-bold uppercase tracking-wide mb-2">Our Menu</h2>
-        <p class="text-neutral-500 text-sm">There is a 1-drink minimum at all of our shows</p>
+        <p class="text-neutral-500 text-sm">There is a 2-drink minimum at all of our shows</p>
       </div>
       <a href="?view=menu" class="px-6 py-2 bg-[#24CECE] text-black font-bold rounded-full uppercase tracking-wider text-xs hover:bg-[#20B8B8] transition-colors shrink-0">View Menu</a>
     </div>
@@ -182,12 +182,17 @@ $galleryImages = [
       <h2 class="text-3xl font-bold uppercase tracking-wide mb-2">Super Fun Nights</h2>
       <p class="text-neutral-500 text-sm">Laughter makes sleep can those many nights.</p>
     </div>
-    <div class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
-      <?php foreach ($galleryImages as $img): ?>
-      <div class="gallery-item break-inside-avoid rounded-[5px] overflow-hidden">
-        <img src="<?= htmlspecialchars($img) ?>" style="width:100%;display:block;" alt="" />
-      </div>
-      <?php endforeach; ?>
+    <div class="grid grid-cols-6 gap-3 auto-rows-[200px]">
+      <!-- Row 1: 2 equal -->
+      <div class="col-span-3 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[0] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-3 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[1] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <!-- Row 2: wide left + small right -->
+      <div class="col-span-4 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[2] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[3] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <!-- Row 3: 3 equal -->
+      <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[4] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[5] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[6] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
     </div>
   </div>
 </section>

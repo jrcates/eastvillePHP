@@ -85,7 +85,7 @@ $success = isset($_POST['form_submitted']) && $_POST['form_submitted'] === '1';
           <div>
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-[5px] text-[#24CECE] font-bold text-sm uppercase tracking-wide mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Auditions Open</div>
             <h3 class="text-3xl font-bold text-white mb-4">Join the <span class="text-[#24CECE]">Ranks</span></h3>
-            <p class="text-xl text-neutral-300 leading-relaxed">EastVille Comedy Club is always looking for the best up and coming comedians in NYC. We hold a weekly <strong class="text-white border-b-2 border-[#24CECE]/50">"Rising Stars Showcase"</strong> and other new talent shows.</p>
+            <p class="text-xl text-neutral-300 leading-relaxed">EastVille Comedy Club is always looking for the best up and coming comedians in NYC. We hold a weekly new talent shows.</p>
           </div>
           <div class="p-6 bg-neutral-950/50 rounded-[5px] border border-white/5">
             <h4 class="text-white font-bold mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#24CECE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg> How to Apply</h4>

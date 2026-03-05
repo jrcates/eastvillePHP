@@ -13,7 +13,7 @@
       <div class="absolute -bottom-6 -right-6 w-3/4 h-3/4 bg-[#24CECE] rounded-[5px] -z-10"></div>
       <div class="absolute -top-6 -left-6 w-full h-full border-2 border-neutral-700 rounded-[5px] -z-10"></div>
       <div class="rounded-[5px] overflow-hidden shadow-2xl relative z-10 bg-black">
-        <img src="assets/pri-img1.jpg" class="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700" alt="Private Event Atmosphere" />
+        <img src="assets/newgal-img4.jpg" class="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700" alt="Private Event Atmosphere" />
       </div>
     </div>
 

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/data.php';
 
 $view = isset($_GET['view']) ? preg_replace('/[^a-z\-]/', '', $_GET['view']) : 'home';
-$validViews = ['home','schedule','comedians','comedian','gallery','menu','about','contact','openmic','private','gift','merchandise','event','addons','checkout','thank-you','series','promodates'];
+$validViews = ['home','schedule','comedians','comedian','gallery','menu','about','contact','openmic','private','gift','event','addons','checkout','thank-you','series','promodates'];
 if (!in_array($view, $validViews)) $view = 'home';
 
 // Asset name aliases
@@ -84,6 +84,10 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
     a[class*="font-bold"][class*="px-"] {
       border-radius: 40px !important;
     }
+    /* Gallery items: 10px border radius */
+    button.gallery-item {
+      border-radius: 10px !important;
+    }
     /* Contact tab buttons: 5px border radius */
     a.tab-btn.tab-btn {
       border-radius: 5px !important;
@@ -156,7 +160,6 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
         </div>
         <a href="?view=schedule" class="block text-lg font-bold hover:text-[#24CECE] transition-colors">Calendar</a>
         <a href="?view=openmic" class="block text-lg font-bold hover:text-[#24CECE] transition-colors">Open Mics</a>
-        <a href="?view=merchandise" class="block text-lg font-bold hover:text-[#24CECE] transition-colors">Merchandise</a>
         <a href="?view=gift" class="block text-lg font-bold hover:text-[#24CECE] transition-colors">Gift Certificates</a>
         <a href="?view=gallery" class="block text-lg font-bold hover:text-[#24CECE] transition-colors">Gallery</a>
         <a href="?view=menu" class="block text-lg font-bold hover:text-[#24CECE] transition-colors">Drink &amp; Snack Menu</a>
@@ -250,7 +253,7 @@ $newsletterBgImg = 'assets/2d185aa45392e3ff7f1b5d944f149117d5a27397.png';
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-8">
             <?php foreach ([
               ['Home','home'],['About Us','about'],['Private Events','private'],['Calendar','schedule'],
-              ['Open Mic','openmic'],['Merchandise','merchandise'],['Gift Certificates','gift'],['Gallery','gallery'],
+              ['Open Mic','openmic'],['Gift Certificates','gift'],['Gallery','gallery'],
               ['Drinks &amp; Snack Menu','menu'],['Comedians','comedians'],['Contact','contact'],
             ] as [$label, $link]): ?>
             <a href="?view=<?= $link ?>" class="text-xs text-neutral-400 font-medium hover:text-[#24CECE] transition-colors"><?= $label ?></a>

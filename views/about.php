@@ -39,7 +39,7 @@
     <?php foreach ([
       ['TV AND FILM', 'film', 'We\'ve been the site of numerous TV and film shoots, and are often the outlet for celebrity comedians who drop by for impromptu performances. We also offer private parties and events for kids featuring child-friendly comedians, magicians and other performers.'],
       ['MANHATTAN', 'map-pin', 'Eastville was established in Manhattan in 2008, and after 10 wonderful years, it was time to upgrade our space. Brooklyn\'s explosion in popularity, culture, and nightlife made it the perfect location.'],
-      ['INFLUENTIAL COMEDIANS', 'users', 'Many of the most influential comedians to ever take the stage, such as: Jackie Gleason, Chris Rock, Mel Brooks, Joan Rivers, as well as all Three Stooges all hail from Brooklyn.'],
+      ['INFLUENTIAL COMEDIANS', 'users', 'Many of the most influential comedians to ever take the stage, such as: Andrew Schulz, Janeane Garofalo, Judah Friedlander, Jim Gaffigan, Amy Schumer &amp; Damon Wayans.'],
     ] as [$title, $iconPath, $desc]): ?>
     <div class="bg-[#3A4655] p-8 rounded-[5px] border border-white/5 hover:border-[#24CECE]/30 transition-colors group">
       <div class="w-12 h-12 bg-[#535B71] rounded-full flex items-center justify-center mb-6 group-hover:bg-[#24CECE] transition-colors">
@@ -57,7 +57,7 @@
       <img src="assets/about-img3.jpg" alt="Comedian performing" class="w-full h-full object-cover" />
     </div>
     <div class="h-[300px] md:h-[400px] rounded-[5px] overflow-hidden relative group">
-      <img src="assets/about-img4.jpg" alt="Eastville Bar Crowd" class="w-full h-full object-cover" />
+      <img src="assets/newgal-img6.jpg" alt="Eastville Bar Crowd" class="w-full h-full object-cover" />
     </div>
   </div>
 </div>
