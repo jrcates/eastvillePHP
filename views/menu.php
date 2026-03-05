@@ -109,7 +109,7 @@ $snackIcon = '<i data-lucide="cookie" class="w-8 h-8"></i>';
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight text-white">
       DRINKS <span class="text-[#24CECE]">MENU</span>
     </h1>
-    <p class="text-xl text-neutral-400 max-w-2xl mx-auto mb-6">We started opening during the day, on Friday, Saturday and Sunday. We open at noon.</p>
+    <p class="text-xl text-white max-w-2xl mx-auto mb-6">We started opening during the day, on Friday, Saturday and Sunday. We open at noon.</p>
     <div class="inline-flex items-center gap-2 text-neutral-400 bg-neutral-900 px-6 py-3 rounded-[5px] border border-neutral-800">
       <i data-lucide="wine" class="w-5 h-5 text-[#24CECE]"></i>
       <span class="font-semibold uppercase tracking-wider text-sm">2-Drink Minimum at All Shows</span>

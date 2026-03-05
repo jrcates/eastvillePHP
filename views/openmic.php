@@ -3,7 +3,7 @@
   <!-- Header -->
   <div class="max-w-4xl mx-auto mb-20 text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">Open <span class="text-[#24CECE]">Mics</span></h1>
-    <p class="text-xl text-neutral-400 font-medium">Where the magic (and the silence) happens.</p>
+    <p class="text-xl text-white font-medium">Where the magic (and the silence) happens.</p>
   </div>
 
   <!-- Top Section -->

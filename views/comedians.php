@@ -52,7 +52,7 @@ $current = array_slice($filtered, ($page - 1) * $perPage, $perPage);
       <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">
         OUR <span class="text-[#24CECE]">COMEDIANS</span>
       </h1>
-      <p class="text-xl text-neutral-400 max-w-2xl mx-auto">
+      <p class="text-xl text-white max-w-2xl mx-auto">
         Meet the talented performers lighting up our stage. From rising stars to seasoned headliners, we bring you the best laughs in Brooklyn.
       </p>
     </div>

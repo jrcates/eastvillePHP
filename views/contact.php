@@ -12,7 +12,7 @@ $success = isset($_POST['form_submitted']) && $_POST['form_submitted'] === '1';
     <i data-lucide="circle-check" class="w-12 h-12 text-green-500"></i>
   </div>
   <h1 class="text-4xl md:text-5xl font-bold mb-6">Message Sent!</h1>
-  <p class="text-xl text-neutral-400 max-w-lg mb-8">Thanks for reaching out. We've received your submission and will get back to you soon.</p>
+  <p class="text-xl text-white max-w-lg mb-8">Thanks for reaching out. We've received your submission and will get back to you soon.</p>
   <a href="?view=contact" class="px-8 py-4 bg-[#24CECE] text-neutral-900 font-bold rounded-[5px] hover:bg-[#20B8B8] transition-colors">Send Another</a>
 </div>
 <?php else: ?>
@@ -22,7 +22,7 @@ $success = isset($_POST['form_submitted']) && $_POST['form_submitted'] === '1';
   <!-- Header -->
   <div class="max-w-4xl mx-auto mb-12 text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">QUESTIONS?</h1>
-    <p class="text-xl text-neutral-400 max-w-2xl mx-auto">Select a category below for General Inquiries, New Talent Auditions, or Show Production Proposals.</p>
+    <p class="text-xl text-white max-w-2xl mx-auto">Select a category below for General Inquiries, New Talent Auditions, or Show Production Proposals.</p>
   </div>
 
   <!-- Tabs -->

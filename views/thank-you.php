@@ -12,7 +12,7 @@
     YOU'RE <span class="text-[#24CECE]">IN!</span>
   </h1>
 
-  <p class="text-xl text-neutral-400 max-w-2xl mx-auto mb-4 leading-relaxed">
+  <p class="text-xl text-white max-w-2xl mx-auto mb-4 leading-relaxed">
     Your tickets are confirmed. Get ready to laugh — we'll see you at the club!
   </p>
   <p class="text-neutral-500 mb-12">A confirmation email has been sent to your inbox.</p>

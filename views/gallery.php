@@ -30,7 +30,7 @@ $galleryImages = [
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">
       THE <span class="text-[#24CECE]">VIBE</span>
     </h1>
-    <p class="text-xl text-neutral-400 max-w-2xl mx-auto">Capturing the laughter, the lights, and the unforgettable nights at EastVille.</p>
+    <p class="text-xl text-white max-w-2xl mx-auto">Capturing the laughter, the lights, and the unforgettable nights at EastVille.</p>
   </div>
 
   <!-- Gallery Grid — Row 1: 1 large + 2 stacked -->

@@ -8,7 +8,7 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
     <i data-lucide="circle-check" class="w-12 h-12 text-green-500"></i>
   </div>
   <h1 class="text-4xl md:text-5xl font-bold mb-6">Thank You!</h1>
-  <p class="text-xl text-neutral-400 max-w-lg mb-8">Your gift certificate purchase was successful. We've sent a confirmation email with the certificate attached.</p>
+  <p class="text-xl text-white max-w-lg mb-8">Your gift certificate purchase was successful. We've sent a confirmation email with the certificate attached.</p>
   <a href="?view=gift" class="px-8 py-4 bg-[#24CECE] text-neutral-900 font-bold rounded-[5px] hover:bg-[#20B8B8] transition-colors">Purchase Another</a>
 </div>
 <?php else: ?>
@@ -17,7 +17,7 @@ $success = isset($_POST['gift_submitted']) && $_POST['gift_submitted'] === '1';
   <!-- Header -->
   <div class="max-w-4xl mx-auto mb-16 text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">GIFT <span class="text-[#24CECE]">CERTIFICATES</span></h1>
-    <p class="text-xl text-neutral-400 max-w-2xl mx-auto">Give the gift of laughter. Perfect for birthdays, holidays, or just because.</p>
+    <p class="text-xl text-white max-w-2xl mx-auto">Give the gift of laughter. Perfect for birthdays, holidays, or just because.</p>
   </div>
 
   <div class="grid lg:grid-cols-12 gap-12 max-w-6xl mx-auto">

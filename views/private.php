@@ -3,7 +3,7 @@
   <!-- Header -->
   <div class="max-w-4xl mx-auto mb-16 text-center">
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">PRIVATE <span class="text-[#24CECE]">EVENTS</span></h1>
-    <p class="text-xl text-neutral-400">Host your next special occasion at EastVille Comedy Club.</p>
+    <p class="text-xl text-white">Host your next special occasion at EastVille Comedy Club.</p>
   </div>
 
   <!-- Main Content + Image -->

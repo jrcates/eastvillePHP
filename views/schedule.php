@@ -36,7 +36,7 @@ foreach ($shows as $show) {
   <!-- Page Title -->
   <div class="mb-8 text-center">
     <h1 class="text-4xl md:text-5xl font-black text-white mb-3 uppercase tracking-tight">Upcoming Comedy Shows</h1>
-    <p class="text-neutral-400 text-lg max-w-2xl mx-auto">Book your seats for Brooklyn's finest comedy.</p>
+    <p class="text-white text-xl max-w-2xl mx-auto">Book your seats for Brooklyn's finest comedy.</p>
   </div>
 
   <!-- ─── Calendar Filter Bar ─── -->

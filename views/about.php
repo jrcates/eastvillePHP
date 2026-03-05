@@ -5,7 +5,7 @@
     <h1 class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">
       WHO ARE <span class="text-[#24CECE]">WE?</span>
     </h1>
-    <p class="text-lg md:text-xl text-neutral-400 font-medium">We are Eastville Comedy Club.. Brooklyn's oldest comedy club! Just laughs &amp; cocktails!</p>
+    <p class="text-xl text-white font-medium">We are Eastville Comedy Club.. Brooklyn's oldest comedy club! Just laughs &amp; cocktails!</p>
   </div>
 
   <!-- Section 1: The Story -->
