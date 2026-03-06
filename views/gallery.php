@@ -33,31 +33,37 @@ $galleryImages = [
     <p class="text-xl text-white max-w-2xl mx-auto">Capturing the laughter, the lights, and the unforgettable nights at EastVille.</p>
   </div>
 
-  <!-- Gallery Grid — Row 1: 1 large + 2 stacked -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[200px] md:auto-rows-[220px]">
+  <!-- Desktop Gallery Grid -->
+  <div class="hidden md:grid grid-cols-4 gap-4 auto-rows-[220px]">
     <?php
-    // Layout pattern per image index: [colSpan, rowSpan]
     $layout = [
-      [2, 2], // img1 — large feature
-      [1, 1], // img2
-      [1, 1], // img3
-      [1, 1], // img4
-      [1, 1], // img5
-      [1, 2], // img6 — tall
-      [1, 1], // img7
-      [2, 2], // img8 — large feature
-      [1, 1], // img9
-      [1, 1], // img10
-      [1, 1], // img11
-      [1, 1], // img12
+      [2, 2], [1, 1], [1, 1], [1, 1], [1, 1], [1, 2], [1, 1], [2, 2], [1, 1], [1, 1], [1, 1], [1, 1],
     ];
     foreach ($galleryImages as $i => $img):
       [$cols, $rows] = $layout[$i] ?? [1, 1];
-      $colClass = $cols === 2 ? 'col-span-2' : 'col-span-1';
-      $rowClass = $rows === 2 ? 'row-span-2' : 'row-span-1';
     ?>
-    <button type="button" class="gallery-item relative group cursor-zoom-in overflow-hidden bg-neutral-900 border border-neutral-800 <?= $colClass ?> <?= $rowClass ?> focus:outline-none focus:ring-2 focus:ring-[#24CECE] focus:ring-offset-2 focus:ring-offset-[#171C1C]" style="border-radius:5px;" aria-label="View image <?= $i + 1 ?>">
+    <button type="button" class="gallery-item relative group cursor-zoom-in overflow-hidden bg-neutral-900 border border-neutral-800 col-span-<?= $cols ?> row-span-<?= $rows ?> focus:outline-none focus:ring-2 focus:ring-[#24CECE] focus:ring-offset-2 focus:ring-offset-[#171C1C]" style="border-radius:5px;" aria-label="View image <?= $i + 1 ?>">
       <img src="<?= htmlspecialchars($img) ?>" alt="EastVille Comedy Club moment <?= $i + 1 ?>" class="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+        <i data-lucide="zoom-in" class="w-10 h-10 text-[#24CECE] scale-0 group-hover:scale-100 transition-transform duration-300"></i>
+      </div>
+    </button>
+    <?php endforeach; ?>
+  </div>
+
+  <!-- Mobile Gallery Grid -->
+  <div class="grid md:hidden grid-cols-2 gap-3">
+    <?php
+    // Mobile layout: pairs side-by-side, feature images go full-width
+    $mobileLayout = [
+      2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2,
+    ];
+    foreach ($galleryImages as $i => $img):
+      $colSpan = $mobileLayout[$i] ?? 1;
+      $height = $colSpan === 2 ? 'h-[220px]' : 'h-[200px]';
+    ?>
+    <button type="button" class="gallery-item relative group cursor-zoom-in overflow-hidden bg-neutral-900 border border-neutral-800 col-span-<?= $colSpan ?> <?= $height ?> focus:outline-none focus:ring-2 focus:ring-[#24CECE] focus:ring-offset-2 focus:ring-offset-[#171C1C]" style="border-radius:5px;" aria-label="View image <?= $i + 1 ?>">
+      <img src="<?= htmlspecialchars($img) ?>" alt="EastVille Comedy Club moment <?= $i + 1 ?>" class="w-full h-full object-cover block" loading="lazy" />
       <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
         <i data-lucide="zoom-in" class="w-10 h-10 text-[#24CECE] scale-0 group-hover:scale-100 transition-transform duration-300"></i>
       </div>

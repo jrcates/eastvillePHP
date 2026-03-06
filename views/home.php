@@ -182,17 +182,24 @@ $galleryImages = [
       <h2 class="text-3xl font-bold uppercase tracking-wide mb-2">Super Fun Nights</h2>
       <p class="text-neutral-500 text-sm">Laughter makes sleep can those many nights.</p>
     </div>
-    <div class="grid grid-cols-6 gap-3 auto-rows-[200px]">
-      <!-- Row 1: 2 equal -->
+    <!-- Mobile: single column, Desktop: 6-col mosaic -->
+    <div class="hidden md:grid grid-cols-6 gap-3 auto-rows-[200px]">
       <div class="col-span-3 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[0] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
       <div class="col-span-3 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[1] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
-      <!-- Row 2: wide left + small right -->
       <div class="col-span-4 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[2] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
       <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[3] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
-      <!-- Row 3: 3 equal -->
       <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[4] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
       <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[5] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
       <div class="col-span-2 row-span-2 rounded-[10px] overflow-hidden"><img src="<?= $galleryImages[6] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+    </div>
+    <div class="grid md:hidden grid-cols-2 gap-3">
+      <div class="rounded-[10px] overflow-hidden h-[200px]"><img src="<?= $galleryImages[0] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="rounded-[10px] overflow-hidden h-[200px]"><img src="<?= $galleryImages[1] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-2 rounded-[10px] overflow-hidden h-[220px]"><img src="<?= $galleryImages[2] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="rounded-[10px] overflow-hidden h-[200px]"><img src="<?= $galleryImages[3] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="rounded-[10px] overflow-hidden h-[200px]"><img src="<?= $galleryImages[4] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-2 rounded-[10px] overflow-hidden h-[220px]"><img src="<?= $galleryImages[5] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
+      <div class="col-span-2 rounded-[10px] overflow-hidden h-[220px]"><img src="<?= $galleryImages[6] ?>" alt="EastVille moment" class="w-full h-full object-cover" /></div>
     </div>
   </div>
 </section>
